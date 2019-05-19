@@ -25,7 +25,7 @@
         android:columnCount="4"
         android:rowCount="4">
 
-        <Button
+        <Button android:id="@+id/book1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
