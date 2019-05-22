@@ -1,10 +1,9 @@
 package br.edu.insper.al.leonardomm4.bookdatabase;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -12,45 +11,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Homepage extends AppCompatActivity {
-
-    private Button book1;
-    LinkedList<TextView> titalts;
-
-
+public class ReadJson extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
-
-
-
-        book1 = findViewById(R.id.book1);
-
-        book1.setOnClickListener(view -> {
-            Intent intent = new Intent(this, BookPage.class);
-            startActivity(intent);
-        });
-
-
-
-        titalts = new LinkedList<>();
-
-        titalts.add(findViewById(R.id.titalt1));
-        titalts.add(findViewById(R.id.titalt2));
-        titalts.add(findViewById(R.id.titalt3));
-
-        loadJson();
-
+        setContentView(R.layout.activity_read_json);
     }
 
-    public void loadJson () {
+    //ESSA PARTE É IGUAL PARA AMBAS == POSSIVEL SOLUÇÃO PARA O QUE O HASHI PEDIU SEGUNDA (COESAO ou ENCAPSULAMENTO)
+    public void loadJson (View view) {
 
         Resources res = getResources();
 
@@ -67,8 +39,10 @@ public class Homepage extends AppCompatActivity {
         parseJson(builder.toString());
     }
 
-    public void parseJson(String s) {
-        LinkedList<StringBuilder> builders = new LinkedList<>();
+    //Essa parte varia para HOMEPAGE e BOOKPAGE
+    public void parseJson(String s){
+        TextView textView = findViewById(R.id.EXEMPLO); // Aqui seria o local para adequar ao XML (EU ACHO)
+        StringBuilder builder = new StringBuilder();
 
         try {
             JSONObject root = new JSONObject(s);
@@ -76,18 +50,14 @@ public class Homepage extends AppCompatActivity {
 
             JSONArray books = data.getJSONArray("books");
 
-
             for(int i=0; i<books.length(); i++){
-                builders.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
-                builders.get(i).append(book.getString("name"));
-                builders.get(i).append("\n");
-                builders.get(i).append(book.getString("author"));
-                titalts.get(i).setText(builders.get(i).toString());
+                builder.append(book.getString("name"));
+                builder.append("\n");
+                builder.append(book.getString("author"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 }
