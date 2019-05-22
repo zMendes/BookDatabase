@@ -46,9 +46,9 @@ public class ReadJson extends AppCompatActivity {
 
         try {
             JSONObject root = new JSONObject(s);
-            //JSONObject book =  root.getJSONObject("books");
+            JSONObject data =  root.getJSONObject("database");
 
-            JSONArray books = books.getJSONArray("books");
+            JSONArray books = data.getJSONArray("books");
 
             for(int i=0; i<books.length(); i++){
                 JSONObject book = books.getJSONObject(i);
