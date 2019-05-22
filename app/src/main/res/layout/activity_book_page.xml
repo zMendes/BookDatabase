@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookPage">
+    tools:context=".BookPage"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
@@ -28,16 +33,16 @@
         android:id="@+id/author"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="167sp"
-        android:layout_marginTop="55sp"
+        android:layout_marginStart="160sp"
+        android:layout_marginTop="-120sp"
         android:textSize="22sp"/>
 
     <TextView
         android:id="@+id/genre"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="167sp"
-        android:layout_marginTop="99sp"
+        android:layout_marginStart="160sp"
+        android:layout_marginTop="20sp"
         android:textSize="22sp"
         tools:ignore="InvalidId" />
 
@@ -45,24 +50,23 @@
         android:id="@+id/has"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="167sp"
-        android:layout_marginTop="143sp"
-        android:textSize="22sp" />
+        android:layout_marginStart="160sp"
+        android:textSize="22sp"
+        android:layout_marginTop="20sp"/>
 
     <TextView
         android:id="@+id/synopsis"
         android:layout_width="370sp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="22sp"
-        android:layout_marginTop="200sp" />
+        android:layout_marginTop="20sp"
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/rating"
         android:layout_width="370sp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="390sp"
+        android:layout_marginTop="20sp"
         android:textSize="22sp" />
 
-</RelativeLayout>
+</LinearLayout>
+    </ScrollView>
