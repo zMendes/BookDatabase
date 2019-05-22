@@ -34,11 +34,26 @@ public class BookPage extends AppCompatActivity {
         rating = findViewById(R.id.rating);
 
 
+        int id;
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                id= 0;
+            } else {
+                id= extras.getInt("idbook");
+            }
+        } else {
+            id= (int) savedInstanceState.getSerializable("idbook");
+        }
+
+
         String json = loadJSON();
         try {
-            JSONObject obj = new JSONObject(json);
-            JSONArray jArr = obj.getJSONArray("books");
-            JSONObject book = jArr.getJSONObject(0);
+
+            JSONObject root = new JSONObject(json);
+            JSONObject data =  root.getJSONObject("database");
+            JSONArray books = data.getJSONArray("books");
+            JSONObject book = books.getJSONObject(id);
             title.setText(book.getString("name"));
             genre.setText("Categoria: " + book.getString("genre"));
             author.setText("Autor: " + book.getString("author"));

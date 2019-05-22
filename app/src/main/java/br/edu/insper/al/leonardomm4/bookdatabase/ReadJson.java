@@ -18,7 +18,7 @@ public class ReadJson extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_read_json);
+      //  setContentView(R.layout.activity_read_json);
     }
 
     //ESSA PARTE É IGUAL PARA AMBAS == POSSIVEL SOLUÇÃO PARA O QUE O HASHI PEDIU SEGUNDA (COESAO ou ENCAPSULAMENTO)
@@ -41,7 +41,7 @@ public class ReadJson extends AppCompatActivity {
 
     //Essa parte varia para HOMEPAGE e BOOKPAGE
     public void parseJson(String s){
-        TextView textView = findViewById(R.id.EXEMPLO); // Aqui seria o local para adequar ao XML (EU ACHO)
+        //TextView textView = findViewById(R.id.EXEMPLO); // Aqui seria o local para adequar ao XML (EU ACHO)
         StringBuilder builder = new StringBuilder();
 
         try {

@@ -20,6 +20,8 @@ import java.util.Scanner;
 public class Homepage extends AppCompatActivity {
 
     private Button book1;
+    private Button book2;
+    private Button book3;
     LinkedList<TextView> titalts;
 
 
@@ -30,12 +32,20 @@ public class Homepage extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
 
 
-
         book1 = findViewById(R.id.book1);
+        book2 = findViewById(R.id.book2);
+        book3 = findViewById(R.id.book3);
 
         book1.setOnClickListener(view -> {
-            Intent intent = new Intent(this, BookPage.class);
-            startActivity(intent);
+            goToPage(0);
+        });
+
+        book2.setOnClickListener(view -> {
+            goToPage(1);
+        });
+
+        book3.setOnClickListener(view -> {
+            goToPage(2);
         });
 
 
@@ -88,6 +98,13 @@ public class Homepage extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goToPage(int id) {
+        Intent intent = new Intent(this, BookPage.class);
+        String strName = null;
+        intent.putExtra("idbook", id);
+        startActivity(intent);
     }
 
 }
