@@ -13,13 +13,13 @@
         android:layout_marginTop="-10sp"
         android:background="@drawable/header"
         android:gravity="center"
-        android:text="Título Livro"
         android:textSize="32sp"
         tools:ignore="InvalidId" />
 
     <ImageView
         android:layout_width="132sp"
         android:layout_height="132sp"
+        android:src="@drawable/cover"
         android:layout_marginLeft="15sp"
         android:layout_marginTop="55sp"
         />
@@ -30,7 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="167sp"
         android:layout_marginTop="55sp"
-        android:text=" Autor:"
         android:textSize="22sp"/>
 
     <TextView
@@ -39,7 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="167sp"
         android:layout_marginTop="99sp"
-        android:text=" Categoria:"
         android:textSize="22sp"
         tools:ignore="InvalidId" />
 
@@ -49,7 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="167sp"
         android:layout_marginTop="143sp"
-        android:text=" Possui: "
         android:textSize="22sp" />
 
     <TextView
@@ -58,16 +55,14 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="22sp"
-        android:layout_marginTop="200sp"
-        android:text=" Descrição:" />
+        android:layout_marginTop="200sp" />
 
     <TextView
         android:id="@+id/rating"
         android:layout_width="370sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="350sp"
-        android:textSize="22sp"
-        android:text=" Opinião:" />
+        android:layout_marginTop="390sp"
+        android:textSize="22sp" />
 
 </RelativeLayout>
