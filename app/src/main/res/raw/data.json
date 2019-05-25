@@ -2,31 +2,49 @@
 	"database": {
 		"books": [
 			{
-				"name": "Placeholder1",
-				"author": "Author1",
-				"genre": "Ficção Científica",
-				"has": false,
-				"synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-				"rating": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-				"where": "Livraria"
-			},
-			{
-				"name": "Placeholder2",
-				"author": "Author2",
-				"genre": "Terror",
+				"name": "Harry Potter e a Pedra Filosofal",
+				"author": "J.K. Rowling",
+				"genre": "Fantasia",
 				"has": true,
-				"synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-				"rating": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-				"where": "Online"
+				"synopsis": "Harry é um garoto cujos pais, feiticeiros, foram assassinados por um poderosíssimo bruxo quando ele ainda era bebê. Ele foi levado, então, para a casa dos tios que não tinham relação com magia. No dia de seu aniversário de 11 anos, sua vida inteira mudou.",
+				"rating": "Livro incrível, história super emocionante, personagens apaixonantes.",
+				"where": "Minha casa quando eu era criança."
 			},
 			{
-				"name": "Placeholder3",
-				"author": "Author3",
-				"genre": "Comédia",
+				"name": "Uncharted - o Quarto labirinto",
+				"author": "Cristopher Golden",
+				"genre": "Aventura",
+				"has": true,
+				"synopsis": "O arqueólogo Luka Hzujak, especialista em labirintos mitológicos, acaba de ser assassinado. Seu corpo, esquartejado, é encontrado dentro de uma mala numa estação de Nova York. Para descobrir quem fez isso a um de seus melhores amigos, Victor Sullivan, um amante de charutos que dedica sua vida a “aquisições praticamente impossíveis de antiguidades”, pede ajuda ao caçador de tesouros Nathan Drake, seu pupilo e companheiro de peripécias. Junto com Jada, a filha do arqueólogo morto, Sully e Drake vão enfrentar a maior aventura de suas vidas.",
+				"rating": "Para quem gosta dos jogos da saga Uncharted, esse livro é uma boa maneira de conhecer mais o mundo de Nathan Drake.",
+				"where": "Online."
+			},
+			{
+				"name": "O Príncipe",
+				"author": "Nicolau Machiavel",
+				"genre": "Cultura",
 				"has": false,
-				"synopsis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-				"rating": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-				"where": "Livraria"
+				"synopsis": "A grandeza e originalidade de 'O Príncipe' consiste em ter alargado o campo da ciência na política, distinguindo os interesses políticos primários das classes, mas confundindo-os, ao mesmo tempo, em uma monstruosa razão de Estado pela qual o povo é apenas matéria plástica nas mãos do Príncipe.",
+				"rating": "Livro complexo de mais para eu compreender.",
+				"where": "Livraria."
+			},
+			{
+				"name": "Zac Power 1 - Ilha do Veneno",
+				"author": "H.I. Larry",
+				"genre": "Aventura",
+				"has": true,
+				"synopsis": "Zac Power tem 12 anos e um trabalho muito incomum: ele é um agente secreto da Agência de Investigação do Governo (AIG). Mas, além de incríveis missões, ele ainda tem que se virar com a escola e com as tarefas de casa. Nesta aventura, ele parte para uma missão numa das ilhas mais perigosas do mundo, a Ilha do Veneno. Lá, ele precisa encontrar a fórmula da Solução X, criada pelo cientista malvado dr. Drástico, e salvar a vida de seu irmão. Será que ele vai conseguir?",
+				"rating": "Livro empolgante que li quando criança.",
+				"where": "Escola."
+			},
+			{				
+				"name": "O livro do chá",
+				"author": "Kazuko Okakura",
+				"genre": "Cultura",
+				"has": false,
+				"synopsis": "Esta obra foi escrita em inglês com o objetivo de levá-la ao maior número de leitores. Muito mais do que um livro explicativo sobre chanoyu, a cerimônia do chá, trata-se de um texto reflexivo, que conduz o leitor, por meio da compreensão do cerimonial, a uma profundidade a princípio insuspeitada: por trás da cerimônia do chá estão o taoísmo, o zen, todo um arcabouço filosófico que é anterior à sua face ritualística.",
+				"rating": "Livro muito bom que me fez compreender o signficado por trás da cerimônia do chá.",
+				"where": "Café."
 			}
 	]
 }
