@@ -71,7 +71,7 @@ public class Homepage extends AppCompatActivity {
         titalts.add(findViewById(R.id.titalt4));
         titalts.add(findViewById(R.id.titalt5));
         String json_f =loadData();
-        if (json_f.isEmpty()){
+        if (json_f == null){
         String json = loadJSON();
         saveData(json);
         json_f = loadData();}
