@@ -12,7 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AddBook extends AppCompatActivity {
+public class AddPage extends AppCompatActivity {
 
     private TextView title;
     private EditText genre;
@@ -51,7 +51,7 @@ public class AddBook extends AppCompatActivity {
                 JSONObject root = new JSONObject(json);
                 JSONObject data = root.getJSONObject("database");
                 JSONArray books = data.getJSONArray("books");
-                JSONObject book = books.getJSONObject(books.length()+1);
+                JSONObject book = new JSONObject();
 
                 book.put("genre", genre.getText().toString());
                 book.put("author", author.getText().toString());
@@ -59,6 +59,7 @@ public class AddBook extends AppCompatActivity {
                 book.put("rating", rating.getText().toString());
                 book.put("synopsis", synopsis.getText().toString());
 
+                books.put(books.length(),book);
                 data.put("books",books);
                 root.put("database", data);
                 saveData(root.toString());

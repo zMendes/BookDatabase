@@ -2,7 +2,6 @@ package br.edu.insper.al.leonardomm4.bookdatabase;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,10 +14,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class Homepage extends AppCompatActivity {
 
@@ -56,7 +52,7 @@ public class Homepage extends AppCompatActivity {
         });
 
         add.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddBook.class);
+            Intent intent = new Intent(this, AddPage.class);
             startActivity(intent);
         });
 
