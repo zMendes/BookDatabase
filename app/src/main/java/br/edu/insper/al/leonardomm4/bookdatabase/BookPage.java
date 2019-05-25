@@ -1,9 +1,11 @@
 package br.edu.insper.al.leonardomm4.bookdatabase;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -21,12 +23,14 @@ public class BookPage extends AppCompatActivity {
     private TextView has;
     private TextView synopsis;
     private TextView rating;
+    private ImageView edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_page);
         title = findViewById(R.id.title);
+        edit =  findViewById(R.id.edit);
         genre = findViewById(R.id.genre);
         author = findViewById(R.id.author);
         has = findViewById(R.id.has);
@@ -63,6 +67,13 @@ public class BookPage extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        edit.setOnClickListener(view -> {
+            Intent intent = new Intent(this, EditPage.class);
+            intent.putExtra("idbook", id);
+            startActivity(intent);
+        });
+
     }
 
     public String loadJSON() {

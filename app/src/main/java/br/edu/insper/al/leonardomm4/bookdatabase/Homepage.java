@@ -1,6 +1,7 @@
 package br.edu.insper.al.leonardomm4.bookdatabase;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -93,7 +94,7 @@ public class Homepage extends AppCompatActivity {
     public void parseJson(String s) {
         LinkedList<StringBuilder> builders = new LinkedList<>();
 
-        try {
+        try { 
             JSONObject root = new JSONObject(s);
             JSONObject data =  root.getJSONObject("database");
 
@@ -115,9 +116,22 @@ public class Homepage extends AppCompatActivity {
 
     public void goToPage(int id) {
         Intent intent = new Intent(this, BookPage.class);
-        String strName = null;
         intent.putExtra("idbook", id);
         startActivity(intent);
+    }
+
+    private void saveData(JSONObject json){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String s = json.toString();
+        editor.putString("data",s);
+        editor.apply();
+    }
+
+    private String loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences",0);
+        String json = sharedPreferences.getString("data", null);
+        return json;
     }
 
 }
