@@ -28,7 +28,9 @@ public class Homepage extends AppCompatActivity {
     private Button book4;
     private Button book5;
     private ImageView about;
+    private ImageView add;
     LinkedList<TextView> titalts;
+
 
 
 
@@ -45,9 +47,16 @@ public class Homepage extends AppCompatActivity {
         book5 = findViewById(R.id.book5);
 
         about = findViewById(R.id.about);
+        add = findViewById(R.id.add);
+
 
         about.setOnClickListener(view -> {
             Intent intent = new Intent(this, About.class);
+            startActivity(intent);
+        });
+
+        add.setOnClickListener(view -> {
+            Intent intent = new Intent(this, AddBook.class);
             startActivity(intent);
         });
 

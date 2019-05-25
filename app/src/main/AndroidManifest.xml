@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".EditPage"></activity>
+        <activity android:name=".AddBook"></activity>
+        <activity android:name=".EditPage" />
         <activity android:name=".About" />
         <activity android:name=".BookPage" />
         <activity android:name=".Homepage">
