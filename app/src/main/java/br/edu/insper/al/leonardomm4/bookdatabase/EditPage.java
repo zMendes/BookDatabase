@@ -1,6 +1,7 @@
 package br.edu.insper.al.leonardomm4.bookdatabase;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -52,7 +53,7 @@ public class EditPage extends AppCompatActivity {
             id = (int) savedInstanceState.getSerializable("idbook");
         }
 
-        String json = loadJSON();
+        String json = loadData();
         try {
 
             JSONObject root = new JSONObject(json);
@@ -91,32 +92,27 @@ public class EditPage extends AppCompatActivity {
 
                 data.put("books",books);
                 root.put("database", data);
-                try (FileWriter file = new FileWriter("R.raw.data"))
-                    {
-                        file.write(root.toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                saveData(root.toString());
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+            Intent intent = new Intent(this, Homepage.class);
+            startActivity(intent);
+
         });
     }
-        public String loadJSON () {
-            String json = null;
-            try {
-                InputStream is = getResources().openRawResource(R.raw.data);
-                int size = is.available();
-                byte[] buffer = new byte[size];
-                is.read(buffer);
-                is.close();
-                json = new String(buffer, "UTF-8");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                return null;
-            }
-            return json;
-        }
+    private void saveData(String s) {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("data", s);
+        editor.apply();
     }
+
+    private String loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
+        String json = sharedPreferences.getString("data", null);
+        return json;
+    }
+}

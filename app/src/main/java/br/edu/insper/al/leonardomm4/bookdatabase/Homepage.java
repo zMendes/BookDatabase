@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,33 +70,20 @@ public class Homepage extends AppCompatActivity {
         titalts.add(findViewById(R.id.titalt3));
         titalts.add(findViewById(R.id.titalt4));
         titalts.add(findViewById(R.id.titalt5));
-
-        loadJson();
-
-    }
-
-    public void loadJson () {
-
-        Resources res = getResources();
-
-        InputStream is = res.openRawResource(R.raw.data);
-
-        Scanner scanner = new Scanner(is);
-
-        StringBuilder builder = new StringBuilder();
-
-        while (scanner.hasNextLine()){
-            builder.append(scanner.nextLine());
+        String json_f =loadData();
+        if (json_f.isEmpty()){
+        String json = loadJSON();
+        saveData(json);
+        json_f = loadData();}
+        else {
+            json_f = loadData() ;
         }
 
-        parseJson(builder.toString());
-    }
 
-    public void parseJson(String s) {
         LinkedList<StringBuilder> builders = new LinkedList<>();
 
-        try { 
-            JSONObject root = new JSONObject(s);
+        try {
+            JSONObject root = new JSONObject(json_f);
             JSONObject data =  root.getJSONObject("database");
 
             JSONArray books = data.getJSONArray("books");
@@ -120,10 +108,26 @@ public class Homepage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void saveData(JSONObject json){
+
+    public String loadJSON() {
+        String json = null;
+        try {
+            InputStream is = getResources().openRawResource(R.raw.data);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
+    private void saveData(String s){
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String s = json.toString();
         editor.putString("data",s);
         editor.apply();
     }
@@ -133,5 +137,4 @@ public class Homepage extends AppCompatActivity {
         String json = sharedPreferences.getString("data", null);
         return json;
     }
-
 }

@@ -2,6 +2,7 @@ package br.edu.insper.al.leonardomm4.bookdatabase;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +31,7 @@ public class BookPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_page);
         title = findViewById(R.id.title);
-        edit =  findViewById(R.id.edit);
+        edit = findViewById(R.id.edit);
         genre = findViewById(R.id.genre);
         author = findViewById(R.id.author);
         has = findViewById(R.id.has);
@@ -41,21 +42,21 @@ public class BookPage extends AppCompatActivity {
         int id;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                id= 0;
+            if (extras == null) {
+                id = 0;
             } else {
-                id= extras.getInt("idbook");
+                id = extras.getInt("idbook");
             }
         } else {
-            id= (int) savedInstanceState.getSerializable("idbook");
+            id = (int) savedInstanceState.getSerializable("idbook");
         }
 
 
-        String json = loadJSON();
+        String json = loadData();
         try {
 
             JSONObject root = new JSONObject(json);
-            JSONObject data =  root.getJSONObject("database");
+            JSONObject data = root.getJSONObject("database");
             JSONArray books = data.getJSONArray("books");
             JSONObject book = books.getJSONObject(id);
             title.setText(book.getString("name"));
@@ -76,19 +77,16 @@ public class BookPage extends AppCompatActivity {
 
     }
 
-    public String loadJSON() {
-        String json = null;
-        try {
-            InputStream is = getResources().openRawResource(R.raw.data);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+    private void saveData(String s) {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("data", s);
+        editor.apply();
+    }
+
+    private String loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
+        String json = sharedPreferences.getString("data", null);
         return json;
     }
 }
