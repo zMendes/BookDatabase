@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -22,6 +23,9 @@ public class Homepage extends AppCompatActivity {
     private Button book1;
     private Button book2;
     private Button book3;
+    private Button book4;
+    private Button book5;
+    private ImageView about;
     LinkedList<TextView> titalts;
 
 
@@ -35,18 +39,25 @@ public class Homepage extends AppCompatActivity {
         book1 = findViewById(R.id.book1);
         book2 = findViewById(R.id.book2);
         book3 = findViewById(R.id.book3);
+        book4 = findViewById(R.id.book4);
+        book5 = findViewById(R.id.book5);
 
-        book1.setOnClickListener(view -> {
-            goToPage(0);
+        about = findViewById(R.id.about);
+
+        about.setOnClickListener(view -> {
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
         });
 
-        book2.setOnClickListener(view -> {
-            goToPage(1);
-        });
+        book1.setOnClickListener(view -> goToPage(0));
 
-        book3.setOnClickListener(view -> {
-            goToPage(2);
-        });
+        book2.setOnClickListener(view -> goToPage(1));
+
+        book3.setOnClickListener(view -> goToPage(2));
+
+        book4.setOnClickListener(view -> goToPage(3));
+
+        book5.setOnClickListener(view -> goToPage(4));
 
 
 
@@ -55,6 +66,8 @@ public class Homepage extends AppCompatActivity {
         titalts.add(findViewById(R.id.titalt1));
         titalts.add(findViewById(R.id.titalt2));
         titalts.add(findViewById(R.id.titalt3));
+        titalts.add(findViewById(R.id.titalt4));
+        titalts.add(findViewById(R.id.titalt5));
 
         loadJson();
 
