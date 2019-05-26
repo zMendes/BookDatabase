@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridView;
@@ -22,7 +24,7 @@ import java.util.LinkedList;
 public class Homepage extends AppCompatActivity {
 
     private GridView gridView;
-    private ArrayList bookList;
+    private ArrayList<Item> bookList;
 
     private Button book1;
     private Button book2;
@@ -56,6 +58,8 @@ public class Homepage extends AppCompatActivity {
         }
 
 
+
+
         about.setOnClickListener(view -> {
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
@@ -67,6 +71,14 @@ public class Homepage extends AppCompatActivity {
         });
 
         RefreshList();
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+
+                goToPage(bookList.get(position).getbookId());
+            }
+        });
     }
 
     protected void RefreshList() {

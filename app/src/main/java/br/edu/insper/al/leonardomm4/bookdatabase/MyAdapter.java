@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends ArrayAdapter {
 
-    ArrayList bookList = new ArrayList<>();
+    ArrayList<Item> bookList = new ArrayList<>();
 
     public MyAdapter(Context context, int textViewResourceId, ArrayList objects) {
         super(context, textViewResourceId, objects);
@@ -32,8 +32,8 @@ public class MyAdapter extends ArrayAdapter {
         v = inflater.inflate(R.layout.grid_view_items, null);
         TextView textView = (TextView) v.findViewById(R.id.textView);
         ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
-        textView.setText("aaaa");
-        imageView.setImageResource(R.drawable.ic_launcher_background);
+        textView.setText(bookList.get(position).getbookName());
+        imageView.setImageResource(bookList.get(position).getbookImage());
         return v;
 
     }

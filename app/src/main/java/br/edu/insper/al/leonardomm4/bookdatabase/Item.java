@@ -4,7 +4,7 @@ public class Item {
 
         String bookListName;
         int bookListImage;
-        int getBookId;
+        int bookListId;
 
         public Item(String bookName,int bookImage,int id)
         {
@@ -18,4 +18,7 @@ public class Item {
         public int getbookImage() {
             return bookListImage;
         }
+        public int getbookId() {
+        return bookListId;
+    }
 }
