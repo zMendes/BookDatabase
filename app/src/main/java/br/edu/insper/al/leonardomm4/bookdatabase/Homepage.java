@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +19,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Homepage extends AppCompatActivity {
+
+    private GridView gridView;
+    private ArrayList<Item> bookList;
 
     private Button book1;
     private Button book2;
@@ -28,7 +36,10 @@ public class Homepage extends AppCompatActivity {
 
     private ImageView about;
     private ImageView add;
+    private CheckBox checkBox;
     LinkedList<TextView> titalts;
+
+    private int picture = R.drawable.ic_launcher_background;
 
 
 
@@ -38,16 +49,19 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+        gridView = findViewById(R.id.gv);
 
-        book1 = findViewById(R.id.book1);
-        book2 = findViewById(R.id.book2);
-        book3 = findViewById(R.id.book3);
-        book4 = findViewById(R.id.book4);
-        book5 = findViewById(R.id.book5);
-        book6 = findViewById(R.id.book6);
+
 
         about = findViewById(R.id.about);
         add = findViewById(R.id.add);
+
+        checkBox = findViewById(R.id.checkbox_owned);
+        if (checkBox.isChecked()) {
+            checkBox.setChecked(false);
+        }
+
+
 
 
         about.setOnClickListener(view -> {
@@ -60,28 +74,23 @@ public class Homepage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        book1.setOnClickListener(view -> goToPage(0));
+        RefreshList();
 
-        book2.setOnClickListener(view -> goToPage(1));
-
-        book3.setOnClickListener(view -> goToPage(2));
-
-        book4.setOnClickListener(view -> goToPage(3));
-
-        book5.setOnClickListener(view -> goToPage(4));
-
-        book6.setOnClickListener(view -> goToPage(5));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
 
 
+                goToPage(bookList.get(position).getbookId());
+            }
+        });
+    }
 
-        titalts = new LinkedList<>();
+    protected void RefreshList() {
 
-        titalts.add(findViewById(R.id.titalt1));
-        titalts.add(findViewById(R.id.titalt2));
-        titalts.add(findViewById(R.id.titalt3));
-        titalts.add(findViewById(R.id.titalt4));
-        titalts.add(findViewById(R.id.titalt5));
-        titalts.add(findViewById(R.id.titalt6));
+        bookList =new ArrayList<>();
+
+
         String json_f =loadData();
         if (json_f == null){
         String json = loadJSON();
@@ -107,11 +116,23 @@ public class Homepage extends AppCompatActivity {
                 builders.get(i).append(book.getString("name"));
                 builders.get(i).append("\n");
                 builders.get(i).append(book.getString("author"));
-                titalts.get(i).setText(builders.get(i).toString());
+                System.out.println(book);
+
+                if (checkBox.isChecked()) {
+                    if (book.getBoolean("has")) {
+                        bookList.add(new Item(builders.get(i).toString(), picture, i));
+                    }
+                } else {
+                    bookList.add(new Item(builders.get(i).toString(), picture, i));
+                }
+                //titalts.get(i).setText(builders.get(i).toString());
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        MyAdapter myAdapter=new MyAdapter(this,R.layout.grid_view_items,bookList);
+        gridView.setAdapter(myAdapter);
+
     }
 
     public void goToPage(int id) {
