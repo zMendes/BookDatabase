@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -91,7 +92,6 @@ public class Homepage extends AppCompatActivity {
             json_f = loadData() ;
         }
 
-
         LinkedList<StringBuilder> builders = new LinkedList<>();
 
         try {
@@ -103,13 +103,12 @@ public class Homepage extends AppCompatActivity {
 
             for(int i=0; i<books.length(); i++){
                 builders.add(new StringBuilder());
-                if (books.get(i)!= null){
                 JSONObject book = books.getJSONObject(i);
                 builders.get(i).append(book.getString("name"));
                 builders.get(i).append("\n");
                 builders.get(i).append(book.getString("author"));
                 titalts.get(i).setText(builders.get(i).toString());
-            }}
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
