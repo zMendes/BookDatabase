@@ -59,7 +59,7 @@ public class AddPage extends AppCompatActivity {
                 book.put("rating", rating.getText().toString());
                 book.put("synopsis", synopsis.getText().toString());
 
-                books.put(books.length(),book);
+                books.put(books.length(),book); 
                 data.put("books",books);
                 root.put("database", data);
                 saveData(root.toString());

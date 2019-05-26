@@ -25,6 +25,7 @@ public class BookPage extends AppCompatActivity {
     private TextView synopsis;
     private TextView rating;
     private ImageView edit;
+    private ImageView remove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class BookPage extends AppCompatActivity {
         setContentView(R.layout.activity_book_page);
         title = findViewById(R.id.title);
         edit = findViewById(R.id.edit);
+        remove = findViewById(R.id.remove);
         genre = findViewById(R.id.genre);
         author = findViewById(R.id.author);
         has = findViewById(R.id.has);
@@ -73,6 +75,25 @@ public class BookPage extends AppCompatActivity {
             Intent intent = new Intent(this, EditPage.class);
             intent.putExtra("idbook", id);
             startActivity(intent);
+        });
+
+
+        remove.setOnClickListener(view -> {
+            try {
+
+                JSONObject root = new JSONObject(json);
+                JSONObject data = root.getJSONObject("database");
+                JSONArray books = data.getJSONArray("books");
+                books.remove(id);
+                data.put("books",books);
+                root.put("database", data);
+                saveData(root.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Intent intent =  new Intent(this, Homepage.class);
+            startActivity(intent);
+
         });
 
     }
