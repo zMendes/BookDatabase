@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".BookPage"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_marginTop="-10sp"
+            android:background="@drawable/header"
+            android:gravity="center"
+            android:textSize="32sp"
+            tools:ignore="InvalidId" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="320sp"
+            android:src="@drawable/edit"/>
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="132sp"
+            android:layout_height="132sp"
+            android:src="@drawable/cover"
+            android:layout_marginLeft="15sp"
+            android:layout_marginTop="15sp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160sp"
+            android:layout_marginTop="-120sp"
+            android:text="Autor:"
+            android:textSize="22sp"/>
+        <EditText
+            android:id="@+id/author"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160sp"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160sp"
+            android:layout_marginTop="20sp"
+            android:text="Gênero:"
+            android:textSize="22sp"/>
+        <EditText
+            android:id="@+id/genre"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160sp"
+            android:textSize="22sp"
+            tools:ignore="InvalidId" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160sp"
+            android:layout_marginTop="20sp"
+            android:text="Possui:"
+            android:textSize="22sp"/>
+        <EditText
+            android:id="@+id/has"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160sp"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sinopse:"
+            android:layout_marginTop="20sp"
+            android:textSize="22sp"/>
+        <EditText
+            android:id="@+id/synopsis"
+            android:layout_width="370sp"
+            android:layout_height="wrap_content"
+            android:textSize="22sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comentário:"
+            android:layout_marginTop="20sp"
+            android:textSize="22sp"/>
+        <EditText
+            android:id="@+id/rating"
+            android:layout_width="370sp"
+            android:layout_height="wrap_content"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/confirm"
+            android:layout_marginStart="145sp"/>
+    </LinearLayout>
+</ScrollView>

@@ -3,11 +3,10 @@
     android:layout_height="match_parent"
     android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".BookPage"
     android:orientation="vertical">
 
@@ -26,12 +25,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="320sp"
         android:src="@drawable/edit"/>
+    <ImageView
+        android:id="@+id/remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="270sp"
+        android:layout_marginTop="-30sp"
+        android:src="@drawable/remove"/>
 
     <ImageView
         android:layout_width="132sp"
         android:layout_height="132sp"
         android:src="@drawable/cover"
-        android:layout_marginLeft="15sp"
+        android:layout_marginStart="15sp"
         android:layout_marginTop="15sp"
         />
 
