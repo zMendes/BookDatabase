@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,6 +24,8 @@ public class Homepage extends AppCompatActivity {
     private Button book3;
     private Button book4;
     private Button book5;
+    private Button book6;
+
     private ImageView about;
     private ImageView add;
     LinkedList<TextView> titalts;
@@ -41,6 +44,7 @@ public class Homepage extends AppCompatActivity {
         book3 = findViewById(R.id.book3);
         book4 = findViewById(R.id.book4);
         book5 = findViewById(R.id.book5);
+        book6 = findViewById(R.id.book6);
 
         about = findViewById(R.id.about);
         add = findViewById(R.id.add);
@@ -66,6 +70,8 @@ public class Homepage extends AppCompatActivity {
 
         book5.setOnClickListener(view -> goToPage(4));
 
+        book6.setOnClickListener(view -> goToPage(5));
+
 
 
         titalts = new LinkedList<>();
@@ -75,24 +81,25 @@ public class Homepage extends AppCompatActivity {
         titalts.add(findViewById(R.id.titalt3));
         titalts.add(findViewById(R.id.titalt4));
         titalts.add(findViewById(R.id.titalt5));
+        titalts.add(findViewById(R.id.titalt6));
         String json_f =loadData();
         if (json_f == null){
         String json = loadJSON();
         saveData(json);
         json_f = loadData();}
+
         else {
             json_f = loadData() ;
         }
 
-
         LinkedList<StringBuilder> builders = new LinkedList<>();
 
         try {
+
             JSONObject root = new JSONObject(json_f);
             JSONObject data =  root.getJSONObject("database");
 
             JSONArray books = data.getJSONArray("books");
-
 
             for(int i=0; i<books.length(); i++){
                 builders.add(new StringBuilder());

@@ -55,6 +55,7 @@ public class BookPage extends AppCompatActivity {
 
 
         String json = loadData();
+
         try {
 
             JSONObject root = new JSONObject(json);
