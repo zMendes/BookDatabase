@@ -18,7 +18,7 @@ import java.io.InputStream;
 
 public class EditPage extends AppCompatActivity {
 
-    private TextView title;
+    private EditText title;
     private EditText genre;
     private EditText author;
     private EditText has;
@@ -84,6 +84,7 @@ public class EditPage extends AppCompatActivity {
                 JSONArray books = data.getJSONArray("books");
                 JSONObject book = books.getJSONObject(id);
 
+                book.put("name", title.getText().toString());
                 book.put("genre", genre.getText().toString());
                 book.put("author", author.getText().toString());
                 book.put("has", has.getText().toString());

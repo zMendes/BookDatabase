@@ -11,7 +11,7 @@
         tools:context=".BookPage"
         android:orientation="vertical">
 
-        <TextView
+        <EditText
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="50sp"
@@ -20,11 +20,6 @@
             android:gravity="center"
             android:textSize="32sp"
             tools:ignore="InvalidId" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="320sp"
-            android:src="@drawable/edit"/>
 
         <ImageView
             android:id="@+id/edit"

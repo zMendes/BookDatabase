@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +32,8 @@ public class Homepage extends AppCompatActivity {
     private Button book3;
     private Button book4;
     private Button book5;
+    private Button book6;
+
     private ImageView about;
     private ImageView add;
     private CheckBox checkBox;
@@ -47,6 +50,7 @@ public class Homepage extends AppCompatActivity {
         setContentView(R.layout.activity_homepage);
 
         gridView = findViewById(R.id.gv);
+
 
 
         about = findViewById(R.id.about);
@@ -72,37 +76,32 @@ public class Homepage extends AppCompatActivity {
 
         RefreshList();
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                goToPage(bookList.get(position).getbookId());
-            }
-        });
-    }
+        gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(position));}
 
     protected void RefreshList() {
 
         bookList =new ArrayList<>();
+
 
         String json_f =loadData();
         if (json_f == null){
         String json = loadJSON();
         saveData(json);
         json_f = loadData();}
+
         else {
             json_f = loadData() ;
         }
 
-
         LinkedList<StringBuilder> builders = new LinkedList<>();
 
         try {
+
             JSONObject root = new JSONObject(json_f);
             JSONObject data =  root.getJSONObject("database");
 
             JSONArray books = data.getJSONArray("books");
-
 
             for(int i=0; i<books.length(); i++){
                 builders.add(new StringBuilder());
