@@ -76,15 +76,8 @@ public class Homepage extends AppCompatActivity {
 
         RefreshList();
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-
-                goToPage(bookList.get(position).getbookId());
-            }
-        });
-    }
+        gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(position));}
 
     protected void RefreshList() {
 
