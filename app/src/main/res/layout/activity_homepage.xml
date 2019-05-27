@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/search"
         android:layout_marginTop="-25sp"
-        android:layout_marginStart="320dp"
+        android:layout_marginStart="320sp"
         />
 
     <CheckBox android:id="@+id/checkbox_owned"
@@ -38,7 +38,7 @@
     <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
-        android:layout_height="607dp"
+        android:layout_height="607sp"
         android:numColumns="3"/>
 
     <ImageView

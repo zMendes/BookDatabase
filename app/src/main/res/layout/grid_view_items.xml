@@ -8,16 +8,16 @@
         android:id="@+id/grid_view_items"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
         android:paddingTop="20dp"
         tools:context="abhiandroid.com.gridviewexample.GridViewItems">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
             android:padding="5dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_launcher_background"
@@ -32,7 +32,7 @@
             android:textColor="#000"
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="13dp" />
+            android:layout_marginBottom="8dp" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
