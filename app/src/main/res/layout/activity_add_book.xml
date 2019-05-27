@@ -20,14 +20,10 @@
             android:gravity="center"
             android:textSize="32sp"
             tools:ignore="InvalidId" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="320sp"
-            android:src="@drawable/edit"/>
+
+
 
         <ImageView
-            android:id="@+id/edit"
             android:layout_width="132sp"
             android:layout_height="132sp"
             android:src="@drawable/cover"
