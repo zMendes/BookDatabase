@@ -63,7 +63,6 @@ public class Homepage extends AppCompatActivity {
 
 
 
-
         about.setOnClickListener(view -> {
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
@@ -109,7 +108,7 @@ public class Homepage extends AppCompatActivity {
                 builders.get(i).append(book.getString("name"));
                 builders.get(i).append("\n");
                 builders.get(i).append(book.getString("author"));
-                System.out.println(book);
+
 
                 if (checkBox.isChecked()) {
                     if (book.getBoolean("has")) {
@@ -118,7 +117,7 @@ public class Homepage extends AppCompatActivity {
                 } else {
                     bookList.add(new Item(builders.get(i).toString(), picture, i));
                 }
-                //titalts.get(i).setText(builders.get(i).toString());
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -163,4 +162,19 @@ public class Homepage extends AppCompatActivity {
         String json = sharedPreferences.getString("data", null);
         return json;
     }
-}
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        switch(view.getId()) {
+            case R.id.checkbox_owned:
+                if (checked){
+                    RefreshList();
+                }
+                // Do something
+            else
+                RefreshList();// Do something else
+                break;
+
+        }
+    }
+
+    }
