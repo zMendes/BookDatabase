@@ -122,6 +122,9 @@ public class Homepage extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
+
         MyAdapter myAdapter=new MyAdapter(this,R.layout.grid_view_items,bookList);
         gridView.setAdapter(myAdapter);
 
@@ -131,6 +134,10 @@ public class Homepage extends AppCompatActivity {
         Intent intent = new Intent(this, BookPage.class);
         intent.putExtra("idbook", id);
         startActivity(intent);
+    }
+
+    public void sortList(ArrayList list) {
+
     }
 
 
