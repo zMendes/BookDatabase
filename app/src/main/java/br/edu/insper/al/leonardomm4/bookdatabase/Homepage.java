@@ -20,24 +20,25 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Homepage extends AppCompatActivity {
 
     private GridView gridView;
     private ArrayList<Item> bookList;
 
-    private Button book1;
-    private Button book2;
-    private Button book3;
-    private Button book4;
-    private Button book5;
-    private Button book6;
+    private ImageView sortName;
+    private ImageView sortAuthor;
 
     private ImageView about;
     private ImageView add;
     private CheckBox checkBox;
-    LinkedList<TextView> titalts;
+
+    private Boolean sorted;
 
     private int picture = R.drawable.ic_launcher_background;
 
@@ -49,7 +50,86 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+
         gridView = findViewById(R.id.gv);
+
+        sortName = findViewById(R.id.sortName);
+        sortName.setOnClickListener(view -> {
+
+            ArrayList<JSONObject> list = new ArrayList<>();
+
+            String json = loadData();
+            JSONObject root;
+            try {
+                root = new JSONObject(json);
+                JSONObject data = root.getJSONObject("database");
+                JSONArray books = data.getJSONArray("books");
+                for (int i=0;i < books.length();i++){
+                    list.add(books.getJSONObject(i));
+                }
+                Collections.sort(list, (jsonObject, t1) -> {
+                    int compare = 0;
+                    try {
+                        compare =jsonObject.getString("name").compareTo(t1.getString("name"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return compare;
+                });
+                JSONArray Sorted = new JSONArray();
+                for (int i = 0; i < list.size(); i++) {
+                    Sorted.put(list.get(i));
+                }
+
+                data.put("books",Sorted);
+                root.put("database", data);
+                saveData(root.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            RefreshList();
+
+
+        });
+
+        sortAuthor = findViewById(R.id.sortAuthor);
+        sortAuthor.setOnClickListener(view -> {
+
+            ArrayList<JSONObject> list = new ArrayList<>();
+
+            String json = loadData();
+            JSONObject root;
+            try {
+                root = new JSONObject(json);
+                JSONObject data = root.getJSONObject("database");
+                JSONArray books = data.getJSONArray("books");
+                for (int i=0;i < books.length();i++){
+                    list.add(books.getJSONObject(i));
+                }
+                Collections.sort(list, (jsonObject, t1) -> {
+                    int compare = 0;
+                    try {
+                        compare =jsonObject.getString("author").compareTo(t1.getString("author"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return compare;
+                });
+                JSONArray Sorted = new JSONArray();
+                for (int i = 0; i < list.size(); i++) {
+                    Sorted.put(list.get(i));
+                }
+
+                data.put("books",Sorted);
+                root.put("database", data);
+                saveData(root.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            RefreshList();
+
+
+        });
 
 
 
@@ -76,7 +156,11 @@ public class Homepage extends AppCompatActivity {
         RefreshList();
 
 
-        gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(position));}
+        gridView.setOnItemClickListener((parent, view, position, id) -> {
+            goToPage(position);
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaa");
+            System.out.println(position);
+        });}
 
     protected void RefreshList() {
 
