@@ -27,6 +27,20 @@
         android:layout_marginStart="320sp"
         />
 
+    <ImageView
+        android:id="@+id/sortName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="290sp"
+        android:src="@drawable/sort"/>
+    <ImageView
+        android:id="@+id/sortAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="320sp"
+        android:layout_marginTop="-31sp"
+        android:src="@drawable/sort" />
+
     <CheckBox android:id="@+id/checkbox_owned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
