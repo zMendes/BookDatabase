@@ -33,6 +33,7 @@
         android:src="@drawable/remove"/>
 
     <ImageView
+        android:id="@+id/cover"
         android:layout_width="132sp"
         android:layout_height="132sp"
         android:src="@drawable/cover"

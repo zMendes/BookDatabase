@@ -187,19 +187,26 @@ public class Homepage extends AppCompatActivity {
             JSONArray books = data.getJSONArray("books");
 
             for(int i=0; i<books.length(); i++){
+                //int i2 = 2;
                 builders.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
                 builders.get(i).append(book.getString("name"));
                 builders.get(i).append("\n");
                 builders.get(i).append(book.getString("author"));
+                String image = book.optString("image");
+
 
 
                 if (checkBox.isChecked()) {
                     if (book.getBoolean("has")) {
-                        bookList.add(new Item(builders.get(i).toString(), picture, i));
+                        Item item = new Item(builders.get(i).toString(), picture, i);
+                        item.setbookImageString(image);
+                        bookList.add(item);
                     }
                 } else {
-                    bookList.add(new Item(builders.get(i).toString(), picture, i));
+                    Item item = new Item(builders.get(i).toString(), picture, i);
+                    item.setbookImageString(image);
+                    bookList.add(item);
                 }
 
             }
