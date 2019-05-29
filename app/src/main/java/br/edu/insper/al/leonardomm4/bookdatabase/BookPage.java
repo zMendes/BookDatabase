@@ -3,6 +3,9 @@ package br.edu.insper.al.leonardomm4.bookdatabase;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -26,6 +30,7 @@ public class BookPage extends AppCompatActivity {
     private TextView rating;
     private ImageView edit;
     private ImageView remove;
+    private ImageView cover;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class BookPage extends AppCompatActivity {
         has = findViewById(R.id.has);
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
+        cover = findViewById(R.id.cover);
 
 
         int id;
@@ -68,6 +74,28 @@ public class BookPage extends AppCompatActivity {
             has.setText("Possui: " + book.getString("has"));
             rating.setText("Opinião: " + book.getString("rating"));
             synopsis.setText("Descrição: " + book.getString("synopsis"));
+
+            String image = book.getString("image");
+            if (image != null && image != "") {
+                // Descobre a URI do último arquivo que foi criado. Aqui não usamos
+                // a URI do provedor de arquivos porque o uso dele é apenas local.
+                Uri uri = Uri.fromFile(new File(image));
+
+                // Carrega uma imagem a partir da URI, se possível.
+                Bitmap bitmap;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                } catch (IOException exception) {
+                    bitmap = null;
+                }
+
+                // Se foi possível, coloca essa imagem no elemento que
+                // incluímos no layout especialmente para exibi-la.
+                if (bitmap != null) {
+                    // ImageView edit = findViewById(R.id.image_example);
+                    cover.setImageBitmap(bitmap);
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

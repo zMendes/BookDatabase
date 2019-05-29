@@ -4,6 +4,7 @@ public class Item {
 
         String bookListName;
         int bookListImage;
+        String bookListImageString;
         int bookListId;
 
         public Item(String bookName,int bookImage,int id)
@@ -21,4 +22,12 @@ public class Item {
         public int getbookId() {
         return bookListId;
     }
+        public String getbookImageString()
+    {
+        return bookListImageString;
+    }
+        public void setbookImageString(String imageString){
+            this.bookListImageString = imageString;
+        }
+
 }
