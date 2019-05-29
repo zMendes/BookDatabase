@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -158,7 +162,7 @@ public class Homepage extends AppCompatActivity {
 
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             goToPage(position);
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaa");
+            System.out.println(bookList);
             System.out.println(position);
         });}
 
@@ -213,9 +217,31 @@ public class Homepage extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        MyAdapter myAdapter=new MyAdapter(this,R.layout.grid_view_items,bookList);
+        MyAdapter myAdapter = new MyAdapter(this,R.layout.grid_view_items,bookList);
         gridView.setAdapter(myAdapter);
 
+    }
+
+
+    public boolean OnCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu,menu);
+        MenuItem item = menu.findItem(R.id.gv);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                bookList.getFilter().filter(s);  //O erro ocorre por ele ser ligado ao ArrayAdapter
+                return false;
+            }
+        });
+        return OnCreateOptionsMenu(menu);
     }
 
     public void goToPage(int id) {
