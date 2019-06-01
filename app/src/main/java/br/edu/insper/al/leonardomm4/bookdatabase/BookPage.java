@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -117,6 +118,8 @@ public class BookPage extends AppCompatActivity {
                 data.put("books",books);
                 root.put("database", data);
                 saveData(root.toString());
+                Toast toast = Toast.makeText(getApplicationContext(), "Livro removido com sucesso", Toast.LENGTH_SHORT);
+                toast.show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
