@@ -80,7 +80,9 @@ public class AddPage extends AppCompatActivity {
 
 
             Intent intent = new Intent(this, Homepage.class);
-            startActivity(intent);}
+            startActivity(intent);
+            Toast toast = Toast.makeText(getApplicationContext(), "Livro adicionado com sucesso", Toast.LENGTH_SHORT);
+            toast.show();}
 
         });
     }

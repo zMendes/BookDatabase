@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,10 +41,6 @@ public class Homepage extends AppCompatActivity {
 
     private Boolean sorted;
 
-    private int picture = R.drawable.ic_launcher_background;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +50,13 @@ public class Homepage extends AppCompatActivity {
 
         gridView = findViewById(R.id.gv);
 
+
+
+        sorted = true;
+
         sortName = findViewById(R.id.sortName);
         sortName.setOnClickListener(view -> {
+            if (sorted){
 
             ArrayList<JSONObject> list = new ArrayList<>();
 
@@ -88,50 +90,46 @@ public class Homepage extends AppCompatActivity {
                 e.printStackTrace();
             }
             RefreshList();
-
-
-        });
-
-        sortAuthor = findViewById(R.id.sortAuthor);
-        sortAuthor.setOnClickListener(view -> {
-
-            ArrayList<JSONObject> list = new ArrayList<>();
-
-            String json = loadData();
-            JSONObject root;
-            try {
-                root = new JSONObject(json);
-                JSONObject data = root.getJSONObject("database");
-                JSONArray books = data.getJSONArray("books");
-                for (int i=0;i < books.length();i++){
-                    list.add(books.getJSONObject(i));
-                }
-                Collections.sort(list, (jsonObject, t1) -> {
-                    int compare = 0;
-                    try {
-                        compare =jsonObject.getString("author").compareTo(t1.getString("author"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    return compare;
-                });
-                JSONArray Sorted = new JSONArray();
-                for (int i = 0; i < list.size(); i++) {
-                    Sorted.put(list.get(i));
-                }
-
-                data.put("books",Sorted);
-                root.put("database", data);
-                saveData(root.toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
+            sorted = false;
             }
-            RefreshList();
+            else {
+                ArrayList<JSONObject> list = new ArrayList<>();
+
+                String json = loadData();
+                JSONObject root;
+                try {
+                    root = new JSONObject(json);
+                    JSONObject data = root.getJSONObject("database");
+                    JSONArray books = data.getJSONArray("books");
+                    for (int i=0;i < books.length();i++){
+                        list.add(books.getJSONObject(i));
+                    }
+                    Collections.sort(list, (jsonObject, t1) -> {
+                        int compare = 0;
+                        try {
+                            compare =jsonObject.getString("author").compareTo(t1.getString("author"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        return compare;
+                    });
+                    JSONArray Sorted = new JSONArray();
+                    for (int i = 0; i < list.size(); i++) {
+                        Sorted.put(list.get(i));
+                    }
+
+                    data.put("books",Sorted);
+                    root.put("database", data);
+                    saveData(root.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                RefreshList();
+                sorted = true;
+            }
 
 
         });
-
-
 
         about = findViewById(R.id.about);
         add = findViewById(R.id.add);
@@ -156,11 +154,7 @@ public class Homepage extends AppCompatActivity {
         RefreshList();
 
 
-        gridView.setOnItemClickListener((parent, view, position, id) -> {
-            goToPage(position);
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaa");
-            System.out.println(position);
-        });}
+        gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(position));}
 
     protected void RefreshList() {
 
@@ -196,7 +190,7 @@ public class Homepage extends AppCompatActivity {
                 String image = book.optString("image");
 
 
-
+                int picture = R.drawable.cover;
                 if (checkBox.isChecked()) {
                     if (book.getBoolean("has")) {
                         Item item = new Item(builders.get(i).toString(), picture, i);

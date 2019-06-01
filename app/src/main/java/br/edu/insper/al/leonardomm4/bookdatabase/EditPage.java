@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -183,7 +184,8 @@ public class EditPage extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            Toast toast = Toast.makeText(getApplicationContext(), "Livro editado com sucesso", Toast.LENGTH_SHORT);
+            toast.show();
             Intent intent = new Intent(this, Homepage.class);
             startActivity(intent);
 
