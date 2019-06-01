@@ -38,13 +38,31 @@
         android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="607dp"
-        android:numColumns="3"/>
+        android:numColumns="3">
+
+    </GridView>
+
+    <TextView
+        android:id="@+id/nlivros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/nautores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="19sp"
+        android:textColor="#444"
+        android:text="TextView" />
 
     <ImageView
         android:id="@+id/add"
-        android:layout_marginStart="140sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/add"
-        />
+        android:layout_marginTop="-38sp"
+        android:layout_marginStart="140sp"
+        android:src="@drawable/add" />
 </LinearLayout>

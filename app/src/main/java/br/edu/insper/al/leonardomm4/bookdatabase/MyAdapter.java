@@ -31,8 +31,10 @@ public class MyAdapter extends ArrayAdapter {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.grid_view_items, null);
         TextView textView = (TextView) v.findViewById(R.id.textView);
+        TextView textView2 = (TextView) v.findViewById(R.id.textView2);
         ImageView imageView = (ImageView) v.findViewById(R.id.imageView);
         textView.setText(bookList.get(position).getbookName());
+        textView2.setText(bookList.get(position).getbookAuthor());
         imageView.setImageResource(bookList.get(position).getbookImage());
         return v;
 
