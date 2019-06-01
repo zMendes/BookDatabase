@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +21,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Homepage extends AppCompatActivity {
 
@@ -27,15 +33,18 @@ public class Homepage extends AppCompatActivity {
     private ArrayList<Item> bookList;
 
 
+    private ImageView sortName;
+
     private ImageView about;
     private ImageView add;
     private CheckBox checkBox;
+
     private TextView nautor;
     private TextView nlivros;
 
     private int picture = R.drawable.ic_launcher_background;
 
-
+    private Boolean sorted;
 
 
 
@@ -44,9 +53,92 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+
         gridView = findViewById(R.id.gv);
         nautor = findViewById(R.id.nautores);
         nlivros = findViewById(R.id.nlivros);
+
+
+        sorted = true;
+
+        sortName = findViewById(R.id.sortName);
+        sortName.setOnClickListener(view -> {
+            if (sorted){
+
+            ArrayList<JSONObject> list = new ArrayList<>();
+
+            String json = loadData();
+            JSONObject root;
+            try {
+                root = new JSONObject(json);
+                JSONObject data = root.getJSONObject("database");
+                JSONArray books = data.getJSONArray("books");
+                for (int i=0;i < books.length();i++){
+                    list.add(books.getJSONObject(i));
+                }
+                Collections.sort(list, (jsonObject, t1) -> {
+                    int compare = 0;
+                    try {
+                        compare =jsonObject.getString("name").compareTo(t1.getString("name"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return compare;
+                });
+                JSONArray Sorted = new JSONArray();
+                for (int i = 0; i < list.size(); i++) {
+                    Sorted.put(list.get(i));
+                }
+
+                data.put("books",Sorted);
+                root.put("database", data);
+                saveData(root.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            System.out.println("By nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            RefreshList();
+            sorted = false;
+            }
+            else {
+                ArrayList<JSONObject> list = new ArrayList<>();
+
+                String json = loadData();
+                JSONObject root;
+                try {
+                    root = new JSONObject(json);
+                    JSONObject data = root.getJSONObject("database");
+                    JSONArray books = data.getJSONArray("books");
+                    for (int i=0;i < books.length();i++){
+                        list.add(books.getJSONObject(i));
+                    }
+                    Collections.sort(list, (jsonObject, t1) -> {
+                        int compare = 0;
+                        try {
+                            compare =jsonObject.getString("author").compareTo(t1.getString("author"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        return compare;
+                    });
+                    JSONArray Sorted = new JSONArray();
+                    for (int i = 0; i < list.size(); i++) {
+                        Sorted.put(list.get(i));
+                    }
+
+                    data.put("books",Sorted);
+                    root.put("database", data);
+                    saveData(root.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                RefreshList();
+                sorted = true;
+                System.out.println("By authooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor");
+            }
+
+
+        });
 
         about = findViewById(R.id.about);
         add = findViewById(R.id.add);
@@ -75,14 +167,9 @@ public class Homepage extends AppCompatActivity {
 
         countBooks();
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                goToPage(position);
-            }
-        });
-    }
+        gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(position));}
+  
 
     protected void RefreshList() {
 
@@ -94,38 +181,48 @@ public class Homepage extends AppCompatActivity {
         String json = loadJSON();
         saveData(json);
         json_f = loadData();}
+
         else {
             json_f = loadData() ;
         }
-
 
         LinkedList<StringBuilder> builders = new LinkedList<>();
         LinkedList<StringBuilder> builders2 = new LinkedList<>();
 
         try {
+
             JSONObject root = new JSONObject(json_f);
             JSONObject data =  root.getJSONObject("database");
 
             JSONArray books = data.getJSONArray("books");
 
-
             for(int i=0; i<books.length(); i++){
+                //int i2 = 2;
                 builders.add(new StringBuilder());
                 builders2.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
                 builders.get(i).append(book.getString("name"));
-                //builders.get(i).append("\n");
-                builders2.get(i).append(book.getString("author"));
-                System.out.println(book);
 
+                builders2.get(i).append(book.getString("author"));
+
+                builders.get(i).append(book.getString("author"));
+                String image = book.optString("image");
+
+                int picture = R.drawable.cover;
                 if (checkBox.isChecked()) {
                     if (book.getBoolean("has")) {
-                        bookList.add(new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i));
+
+                        Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
+                        item.setbookImageString(image);
+                        bookList.add(item);
                     }
                 } else {
-                    bookList.add(new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i));
+                    Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
+                    item.setbookImageString(image);
+                    bookList.add(item);
+
                 }
-                //titalts.get(i).setText(builders.get(i).toString());
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -215,4 +312,19 @@ public class Homepage extends AppCompatActivity {
         String json = sharedPreferences.getString("data", null);
         return json;
     }
-}
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        switch(view.getId()) {
+            case R.id.checkbox_owned:
+                if (checked){
+                    RefreshList();
+                }
+                // Do something
+            else
+                RefreshList();// Do something else
+                break;
+
+        }
+    }
+
+    }

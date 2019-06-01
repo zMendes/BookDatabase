@@ -4,14 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_marginTop="-10sp"
+        android:layout_marginStart="-1.7sp"
         android:background="@drawable/header"
         android:gravity="center"
         android:text="Booky"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        android:fontFamily="@font/montserrat"
+        />
+
     <ImageView
         android:id="@+id/about"
         android:layout_width="wrap_content"
@@ -24,30 +29,39 @@
         android:layout_height="wrap_content"
         android:src="@drawable/search"
         android:layout_marginTop="-25sp"
-        android:layout_marginStart="320dp"
+        android:layout_marginStart="320sp"
         />
+
+    <ImageView
+        android:id="@+id/sortName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="310sp"
+        android:layout_marginTop="10sp"
+        android:src="@drawable/sort"/>
+
+
 
     <CheckBox android:id="@+id/checkbox_owned"
         android:layout_width="wrap_content"
+        android:layout_marginTop="-30sp"
         android:layout_height="wrap_content"
         android:text="Somente possuidos:"
         android:onClick="onCheckboxClicked"/>
 
 
+
     <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
-        android:layout_height="607dp"
-        android:numColumns="3">
-
-    </GridView>
+        android:layout_height="607sp"
+        android:numColumns="3"/>
 
     <TextView
         android:id="@+id/nlivros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-
         android:text="TextView" />
 
     <TextView
@@ -60,9 +74,10 @@
 
     <ImageView
         android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-38sp"
         android:layout_marginStart="140sp"
-        android:src="@drawable/add" />
+        android:layout_marginTop="-108sp"
+        android:layout_width="60sp"
+        android:layout_height="60sp"
+        android:src="@drawable/add"
+        />
 </LinearLayout>

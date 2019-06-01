@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,8 +30,8 @@ public class AddPage extends AppCompatActivity {
         setContentView(R.layout.activity_add_book);
         title = findViewById(R.id.title);
         edit = findViewById(R.id.edit);
-        genre = findViewById(R.id.genre);
         author = findViewById(R.id.author);
+        genre = findViewById(R.id.genre);
         has = findViewById(R.id.has);
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
@@ -47,19 +48,28 @@ public class AddPage extends AppCompatActivity {
 
         confirm.setOnClickListener(view -> {
             String json = loadData();
+            if (title.getText().toString().isEmpty()|| author.getText().toString().isEmpty()|| genre.getText().toString().isEmpty()
+                    || has.getText().toString().isEmpty() || rating.getText().toString().isEmpty() || synopsis.getText().toString().isEmpty()){
+                Toast toast = Toast.makeText(getApplicationContext(), "Complete os itens restantes",Toast.LENGTH_LONG);
+                toast.show();
+            }
+            else {
             try {
                 JSONObject root = new JSONObject(json);
                 JSONObject data = root.getJSONObject("database");
                 JSONArray books = data.getJSONArray("books");
                 JSONObject book = new JSONObject();
 
-                book.put("genre", genre.getText().toString());
-                book.put("author", author.getText().toString());
-                book.put("has", has.getText().toString());
-                book.put("rating", rating.getText().toString());
-                book.put("synopsis", synopsis.getText().toString());
 
-                books.put(books.length(),book); 
+                book.put("name", title.getText().toString());
+                book.put("author", author.getText().toString());
+                book.put("genre", genre.getText().toString());
+                book.put("has", has.getText().toString());
+                book.put("synopsis", synopsis.getText().toString());
+                book.put("rating", rating.getText().toString());
+
+
+                books.put(books.length(),book);
                 data.put("books",books);
                 root.put("database", data);
                 saveData(root.toString());
@@ -68,8 +78,11 @@ public class AddPage extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
             Intent intent = new Intent(this, Homepage.class);
             startActivity(intent);
+            Toast toast = Toast.makeText(getApplicationContext(), "Livro adicionado com sucesso", Toast.LENGTH_SHORT);
+            toast.show();}
 
         });
     }
