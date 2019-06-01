@@ -111,6 +111,7 @@ public class Homepage extends AppCompatActivity {
 
             for(int i=0; i<books.length(); i++){
                 builders.add(new StringBuilder());
+                builders2.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
                 builders.get(i).append(book.getString("name"));
                 //builders.get(i).append("\n");
