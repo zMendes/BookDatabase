@@ -51,17 +51,31 @@
 
 
 
-
     <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="607sp"
         android:numColumns="3"/>
 
+    <TextView
+        android:id="@+id/nlivros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/nautores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="19sp"
+        android:textColor="#444"
+        android:text="TextView" />
+
     <ImageView
         android:id="@+id/add"
         android:layout_marginStart="140sp"
-        android:layout_marginTop="-80sp"
+        android:layout_marginTop="-108sp"
         android:layout_width="60sp"
         android:layout_height="60sp"
         android:src="@drawable/add"

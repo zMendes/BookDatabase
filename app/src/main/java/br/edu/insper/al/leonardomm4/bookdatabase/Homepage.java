@@ -32,14 +32,20 @@ public class Homepage extends AppCompatActivity {
     private GridView gridView;
     private ArrayList<Item> bookList;
 
-    private ImageView sortName;
 
+    private ImageView sortName;
 
     private ImageView about;
     private ImageView add;
     private CheckBox checkBox;
 
+    private TextView nautor;
+    private TextView nlivros;
+
+    private int picture = R.drawable.ic_launcher_background;
+
     private Boolean sorted;
+
 
 
     @Override
@@ -49,7 +55,8 @@ public class Homepage extends AppCompatActivity {
 
 
         gridView = findViewById(R.id.gv);
-
+        nautor = findViewById(R.id.nautores);
+        nlivros = findViewById(R.id.nlivros);
 
 
         sorted = true;
@@ -137,6 +144,8 @@ public class Homepage extends AppCompatActivity {
         add = findViewById(R.id.add);
 
         checkBox = findViewById(R.id.checkbox_owned);
+        checkBox.setChecked(false);
+
         if (checkBox.isChecked()) {
             checkBox.setChecked(false);
         }
@@ -156,7 +165,11 @@ public class Homepage extends AppCompatActivity {
         RefreshList();
 
 
+        countBooks();
+
+
         gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(position));}
+  
 
     protected void RefreshList() {
 
@@ -174,6 +187,7 @@ public class Homepage extends AppCompatActivity {
         }
 
         LinkedList<StringBuilder> builders = new LinkedList<>();
+        LinkedList<StringBuilder> builders2 = new LinkedList<>();
 
         try {
 
@@ -185,24 +199,25 @@ public class Homepage extends AppCompatActivity {
             for(int i=0; i<books.length(); i++){
                 //int i2 = 2;
                 builders.add(new StringBuilder());
+                builders2.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
                 builders.get(i).append(book.getString("name"));
-                builders.get(i).append("\n");
-                builders.get(i).append(book.getString("author"));
+                builders2.get(i).append(book.getString("author"));
                 String image = book.optString("image");
-
 
                 int picture = R.drawable.cover;
                 if (checkBox.isChecked()) {
                     if (book.getBoolean("has")) {
-                        Item item = new Item(builders.get(i).toString(), picture, i);
+
+                        Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
                         item.setbookImageString(image);
                         bookList.add(item);
                     }
                 } else {
-                    Item item = new Item(builders.get(i).toString(), picture, i);
+                    Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
                     item.setbookImageString(image);
                     bookList.add(item);
+
                 }
 
             }
@@ -213,6 +228,51 @@ public class Homepage extends AppCompatActivity {
         gridView.setAdapter(myAdapter);
 
     }
+
+    public void countBooks() {
+        int nbooks = 0;
+        int nauthors = 0;
+
+        bookList = new ArrayList<>();
+
+        ArrayList<String> listauthors = new ArrayList<>();
+
+
+        String json_f = loadData();
+        if (json_f == null) {
+            String json = loadJSON();
+            saveData(json);
+            json_f = loadData();
+        } else {
+            json_f = loadData();
+        }
+
+        try {
+            JSONObject root = new JSONObject(json_f);
+            JSONObject data = root.getJSONObject("database");
+
+            JSONArray livros = data.getJSONArray("books");
+
+
+            for (int i = 0; i < livros.length(); i++) {
+                nbooks++;
+                JSONObject book = livros.getJSONObject(i);
+                String aut = book.getString("name");
+
+                if (!(listauthors.contains(aut))) {
+                    nauthors++;
+                    listauthors.add(aut);
+                }
+
+            }
+        }
+        catch(JSONException e){
+                e.printStackTrace();
+            }
+        nlivros.setText("# Books: "+nbooks);
+        nautor.setText("# Authors: "+nauthors);
+    }
+
 
     public void goToPage(int id) {
         Intent intent = new Intent(this, BookPage.class);
