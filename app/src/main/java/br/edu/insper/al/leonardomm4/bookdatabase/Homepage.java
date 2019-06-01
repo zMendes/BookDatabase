@@ -33,7 +33,7 @@ public class Homepage extends AppCompatActivity {
     private ArrayList<Item> bookList;
 
     private ImageView sortName;
-    private ImageView sortAuthor;
+
 
     private ImageView about;
     private ImageView add;
@@ -89,6 +89,7 @@ public class Homepage extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            System.out.println("By nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
             RefreshList();
             sorted = false;
             }
@@ -126,6 +127,7 @@ public class Homepage extends AppCompatActivity {
                 }
                 RefreshList();
                 sorted = true;
+                System.out.println("By authooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor");
             }
 
 
