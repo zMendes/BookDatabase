@@ -79,7 +79,7 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-                goToPage(bookList.get(position).getbookId());
+                goToPage(position);
             }
         });
     }
