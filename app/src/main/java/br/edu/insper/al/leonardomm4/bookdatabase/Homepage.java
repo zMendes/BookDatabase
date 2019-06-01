@@ -202,10 +202,7 @@ public class Homepage extends AppCompatActivity {
                 builders2.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
                 builders.get(i).append(book.getString("name"));
-
                 builders2.get(i).append(book.getString("author"));
-
-                builders.get(i).append(book.getString("author"));
                 String image = book.optString("image");
 
                 int picture = R.drawable.cover;
