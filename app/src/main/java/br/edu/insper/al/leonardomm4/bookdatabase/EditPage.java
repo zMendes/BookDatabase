@@ -1,14 +1,24 @@
 package br.edu.insper.al.leonardomm4.bookdatabase;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +44,10 @@ public class EditPage extends AppCompatActivity {
     private ImageView edit;
     private ImageView confirm;
     private String lastPath;
-    private static final int REQUEST_TAKE_PHOTO = 1;
+    private static final int CAMERA_REQUEST_CODE = 1;
+    private static final int GALLERY_REQUEST_CODE = 2;
+    private static final int PERMISSION_REQUEST_CAMERA = 101;
+    private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,64 +116,86 @@ public class EditPage extends AppCompatActivity {
         }
 
         edit.setOnClickListener(view -> {
-            // Intent intent = new Intent(this, EditPage.class);
-            // intent.putExtra("idbook", id);
-            // startActivity(intent);
+            final CharSequence[] options = { "Tirar Foto", "Escolher da Galeria","Cancelar" };
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditPage.this);
+            builder.setTitle("Escolher Imagem");
+            builder.setItems(options, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int item) {
+                    if (options[item].equals("Tirar Foto"))
+                    {
+                        if (ContextCompat.checkSelfPermission(EditPage.this, Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            // Permission is not granted
+                            if (ActivityCompat.shouldShowRequestPermissionRationale(EditPage.this,
+                                    Manifest.permission.CAMERA)) {
+                                // Show an explanation to the user *asynchronously* -- don't block
+                                // this thread waiting for the user's response! After the user
+                                // sees the explanation, try again to request the permission.
+                            } else {
+                                // No explanation needed; request the permission
+                                ActivityCompat.requestPermissions(EditPage.this,
+                                        new String[]{Manifest.permission.CAMERA},
+                                        PERMISSION_REQUEST_CAMERA);
+                            }
+                        } else {
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (intent.resolveActivity(getPackageManager()) == null) {
+                                return;
+                            }
+                            File directory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
-            // Constrói uma Intent que corresponde ao pedido de "tirar foto".
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            File file;
+                            try {
+                                file = File.createTempFile("image", ".jpg", directory);
+                            } catch (IOException exception) {
+                                file = null;
+                            }
+                            if (file == null) {
+                                return;
+                            }
 
-            // Se não existe no celular uma Activity que aceite esse Intent,
-            // não podemos fazer nada. Parece um caso meio absurdo, mas o
-            // usuário pode ter desativado a câmera por algum motivo.
-            if (intent.resolveActivity(getPackageManager()) == null) {
-                return;
-            }
+                            // Guarda o caminho do arquivo no atributo.
+                            lastPath = file.getAbsolutePath();
 
-            // A ideia é criar um arquivo e compartilhar esse arquivo com o
-            // aplicativo que receba a Intent, para que ele possa gravar a
-            // foto nele. Por isso precisamos de um provedor de arquivos.
-
-            // Escolhemos para guardar o arquivo a pasta padrão para fotos.
-            File directory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-            // Esse método createTempFile é especial: além de criar o arquivo,
-            // também garante que o nome desse arquivo vai ser único na pasta.
-            File file;
-            try {
-                file = File.createTempFile("image", ".jpg", directory);
-            } catch (IOException exception) {
-                file = null;
-            }
-
-            // Se o arquivo não pôde ser criado, não podemos fazer nada.
-            if (file == null) {
-                return;
-            }
-
-            // Guarda o caminho do arquivo no atributo.
-            lastPath = file.getAbsolutePath();
-
-            // O arquivo será passado para o aplicativo de câmera através de
-            // uma URI criada pelo provedor de arquivos. Atenção: o nome de
-            // pacote no parâmetro "authority" deve ser EXATAMENTE IGUAL no
-            // nome no arquivo de configuração manifests/AndroidManifest.xml.
-            Uri uri = FileProvider.getUriForFile(
-                    this,
-                    "br.edu.insper.al.leonardomm4.bookdatabase.fileprovider",
-                    file
-            );
-
-            // Anexa a URI na Intent, para que o aplicativo de câmera a receba.
-            // Essa é uma maneira comum de uma Activity passar dados para outra.
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-
-            // Dispara a Intent. Lembrando que quem vai receber essa Intent não
-            // é este aplicativo, mas algum outro que saiba recebê-la. No caso,
-            // estamos esperando que o aplicativo de câmera faça isso.
-            startActivityForResult(intent, REQUEST_TAKE_PHOTO);
-
+                            Uri uri = FileProvider.getUriForFile(
+                                    EditPage.this,
+                                    "br.edu.insper.al.leonardomm4.bookdatabase.fileprovider",
+                                    file
+                            );
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                            startActivityForResult(intent, CAMERA_REQUEST_CODE);
+                        }
+                    }
+                    else if (options[item].equals("Escolher da Galeria"))
+                    {
+                        if (ContextCompat.checkSelfPermission(EditPage.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            // Permission is not granted
+                            if (ActivityCompat.shouldShowRequestPermissionRationale(EditPage.this,
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                                // Show an explanation to the user *asynchronously* -- don't block
+                                // this thread waiting for the user's response! After the user
+                                // sees the explanation, try again to request the permission.
+                            } else {
+                                // No explanation needed; request the permission
+                                ActivityCompat.requestPermissions(EditPage.this,
+                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                        PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
+                            }
+                        } else {
+                            Intent intent=new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(intent, GALLERY_REQUEST_CODE);
+                        }
+                    }
+                    else if (options[item].equals("Cancelar")) {
+                        dialog.dismiss();
+                    }
+                }
+            });
+            builder.show();
         });
+
 
         confirm.setOnClickListener(view -> {
             try {
@@ -201,7 +236,7 @@ public class EditPage extends AppCompatActivity {
 
         // Confirma que de fato é o resultado da Intent de "tirar foto"
         // e que de fato a Activity que recebeu a Intent teve resultado.
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
 
             // Descobre a URI do último arquivo que foi criado. Aqui não usamos
             // a URI do provedor de arquivos porque o uso dele é apenas local.
@@ -222,6 +257,20 @@ public class EditPage extends AppCompatActivity {
                 edit.setImageBitmap(bitmap);
             }
         }
+
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK) {
+
+            Uri selectedImage = data.getData();
+            String[] filePath = { MediaStore.Images.Media.DATA };
+            Cursor c = getContentResolver().query(selectedImage,filePath, null, null, null);
+            c.moveToFirst();
+            int columnIndex = c.getColumnIndex(filePath[0]);
+            String picturePath = c.getString(columnIndex);
+            c.close();
+            Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+            lastPath = picturePath;
+            edit.setImageBitmap(thumbnail);
+        }
     }
 
     private void saveData(String s) {
@@ -235,5 +284,39 @@ public class EditPage extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
         String json = sharedPreferences.getString("data", null);
         return json;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            case PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
     }
 }

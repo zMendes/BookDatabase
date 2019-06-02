@@ -42,13 +42,10 @@ public class MyAdapter extends ArrayAdapter {
         textView2.setText(bookList.get(position).getbookAuthor());
         imageView.setImageResource(bookList.get(position).getbookImage());
 
-        String image = bookList.get(position).getbookImageString();
+        String imageFile = bookList.get(position).getbookImageFile();
 
-        if (image != null && image != "") {
-            // Descobre a URI do último arquivo que foi criado. Aqui não usamos
-            // a URI do provedor de arquivos porque o uso dele é apenas local.
-            Uri uri = Uri.fromFile(new File(image));
-
+        if (imageFile != null && imageFile != "") {
+            Uri uri = Uri.fromFile(new File(imageFile));
             // Carrega uma imagem a partir da URI, se possível.
             Bitmap bitmap;
             try {
@@ -56,7 +53,6 @@ public class MyAdapter extends ArrayAdapter {
             } catch (IOException exception) {
                 bitmap = null;
             }
-
             // Se foi possível, coloca essa imagem no elemento que
             // incluímos no layout especialmente para exibi-la.
             if (bitmap != null) {
