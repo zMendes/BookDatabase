@@ -15,9 +15,18 @@
         android:background="@drawable/header"
         android:gravity="center"
         android:textSize="32sp" />
+
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/icon"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:src="@drawable/icon"
+        android:layout_marginTop="-42sp"
+        android:layout_marginStart="52sp"/>
+
+    <ImageView
+        android:layout_width="300sp"
+        android:layout_height="300sp"
         android:src="@drawable/icon"/>
 
     <TextView

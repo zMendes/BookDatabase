@@ -35,6 +35,7 @@ public class EditPage extends AppCompatActivity {
     private ImageView confirm;
     private String lastPath;
     private static final int REQUEST_TAKE_PHOTO = 1;
+    private ImageView icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,11 @@ public class EditPage extends AppCompatActivity {
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         confirm = findViewById(R.id.confirm);
+        icon = findViewById(R.id.icon);
+        icon.setOnClickListener(view -> {
+            Intent intent = new Intent(this, Homepage.class);
+            startActivity(intent);
+        });
 
 
         int id;
