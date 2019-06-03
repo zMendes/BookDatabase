@@ -40,13 +40,13 @@
 
 
         <ImageView
+            android:id="@+id/edit"
             android:layout_width="132sp"
             android:layout_height="132sp"
             android:src="@drawable/cover"
             android:layout_marginLeft="15sp"
             android:layout_marginTop="15sp"
             />
-
 
         <TextView
             android:layout_width="wrap_content"

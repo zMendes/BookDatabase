@@ -5,7 +5,7 @@ public class Item {
         String bookListName;
         String bookListAuthor;
         int bookListImage;
-        String bookListImageString;
+        String bookListImageFile;
         int bookListId;
 
         public Item(String bookName,String bookAuthor,int bookImage,int id)
@@ -28,12 +28,12 @@ public class Item {
         public int getbookId() {
         return bookListId;
     }
-        public String getbookImageString()
+        public String getbookImageFile()
     {
-        return bookListImageString;
+        return bookListImageFile;
     }
-        public void setbookImageString(String imageString){
-            this.bookListImageString = imageString;
+        public void setbookImageFile(String imageFile){
+            this.bookListImageFile = imageFile;
         }
 
 }
