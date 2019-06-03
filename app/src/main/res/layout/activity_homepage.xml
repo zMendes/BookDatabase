@@ -75,7 +75,7 @@
         android:id="@+id/nlivros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-10sp"
+        android:layout_marginTop="-40sp"
         android:layout_marginStart="270sp"
         android:textColor="#444"
         android:textSize="16sp"
@@ -92,10 +92,10 @@
 
     <ImageView
         android:id="@+id/add"
-        android:layout_marginTop="-90sp"
+        android:layout_marginTop="-60sp"
         android:layout_width="60sp"
         android:layout_height="60sp"
-        android:layout_marginStart="140sp"
+        android:layout_marginStart="145sp"
         android:src="@drawable/add"
         />
     </LinearLayout>

@@ -128,78 +128,75 @@ public class EditPage extends AppCompatActivity {
             final CharSequence[] options = { "Tirar Foto", "Escolher da Galeria","Cancelar" };
             AlertDialog.Builder builder = new AlertDialog.Builder(EditPage.this);
             builder.setTitle("Escolher Imagem");
-            builder.setItems(options, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int item) {
-                    if (options[item].equals("Tirar Foto"))
-                    {
-                        if (ContextCompat.checkSelfPermission(EditPage.this, Manifest.permission.CAMERA)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            // Permission is not granted
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(EditPage.this,
-                                    Manifest.permission.CAMERA)) {
-                                // Show an explanation to the user *asynchronously* -- don't block
-                                // this thread waiting for the user's response! After the user
-                                // sees the explanation, try again to request the permission.
-                            } else {
-                                // No explanation needed; request the permission
-                                ActivityCompat.requestPermissions(EditPage.this,
-                                        new String[]{Manifest.permission.CAMERA},
-                                        PERMISSION_REQUEST_CAMERA);
-                            }
+            builder.setItems(options, (dialog, item) -> {
+                if (options[item].equals("Tirar Foto"))
+                {
+                    if (ContextCompat.checkSelfPermission(EditPage.this, Manifest.permission.CAMERA)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Permission is not granted
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(EditPage.this,
+                                Manifest.permission.CAMERA)) {
+                            // Show an explanation to the user *asynchronously* -- don't block
+                            // this thread waiting for the user's response! After the user
+                            // sees the explanation, try again to request the permission.
                         } else {
-                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            if (intent.resolveActivity(getPackageManager()) == null) {
-                                return;
-                            }
-                            File directory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-                            File file;
-                            try {
-                                file = File.createTempFile("image", ".jpg", directory);
-                            } catch (IOException exception) {
-                                file = null;
-                            }
-                            if (file == null) {
-                                return;
-                            }
-
-                            // Guarda o caminho do arquivo no atributo.
-                            lastPath = file.getAbsolutePath();
-
-                            Uri uri = FileProvider.getUriForFile(
-                                    EditPage.this,
-                                    "br.edu.insper.al.leonardomm4.bookdatabase.fileprovider",
-                                    file
-                            );
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                            startActivityForResult(intent, CAMERA_REQUEST_CODE);
+                            // No explanation needed; request the permission
+                            ActivityCompat.requestPermissions(EditPage.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    PERMISSION_REQUEST_CAMERA);
                         }
+                    } else {
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (intent.resolveActivity(getPackageManager()) == null) {
+                            return;
+                        }
+                        File directory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+                        File file;
+                        try {
+                            file = File.createTempFile("image", ".jpg", directory);
+                        } catch (IOException exception) {
+                            file = null;
+                        }
+                        if (file == null) {
+                            return;
+                        }
+
+                        // Guarda o caminho do arquivo no atributo.
+                        lastPath = file.getAbsolutePath();
+
+                        Uri uri = FileProvider.getUriForFile(
+                                EditPage.this,
+                                "br.edu.insper.al.leonardomm4.bookdatabase.fileprovider",
+                                file
+                        );
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                        startActivityForResult(intent, CAMERA_REQUEST_CODE);
                     }
-                    else if (options[item].equals("Escolher da Galeria"))
-                    {
-                        if (ContextCompat.checkSelfPermission(EditPage.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                != PackageManager.PERMISSION_GRANTED) {
-                            // Permission is not granted
-                            if (ActivityCompat.shouldShowRequestPermissionRationale(EditPage.this,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                                // Show an explanation to the user *asynchronously* -- don't block
-                                // this thread waiting for the user's response! After the user
-                                // sees the explanation, try again to request the permission.
-                            } else {
-                                // No explanation needed; request the permission
-                                ActivityCompat.requestPermissions(EditPage.this,
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
-                            }
+                }
+                else if (options[item].equals("Escolher da Galeria"))
+                {
+                    if (ContextCompat.checkSelfPermission(EditPage.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        // Permission is not granted
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(EditPage.this,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            // Show an explanation to the user *asynchronously* -- don't block
+                            // this thread waiting for the user's response! After the user
+                            // sees the explanation, try again to request the permission.
                         } else {
-                            Intent intent=new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(intent, GALLERY_REQUEST_CODE);
+                            // No explanation needed; request the permission
+                            ActivityCompat.requestPermissions(EditPage.this,
+                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
                         }
+                    } else {
+                        Intent intent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(intent, GALLERY_REQUEST_CODE);
                     }
-                    else if (options[item].equals("Cancelar")) {
-                        dialog.dismiss();
-                    }
+                }
+                else if (options[item].equals("Cancelar")) {
+                    dialog.dismiss();
                 }
             });
             builder.show();
@@ -224,6 +221,7 @@ public class EditPage extends AppCompatActivity {
                 data.put("books",books);
                 root.put("database", data);
                 saveData(root.toString());
+
 
             } catch (JSONException e) {
                 e.printStackTrace();

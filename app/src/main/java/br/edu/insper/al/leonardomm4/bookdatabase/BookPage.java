@@ -80,8 +80,8 @@ public class BookPage extends AppCompatActivity {
             genre.setText("Categoria: " + book.getString("genre"));
             author.setText("Autor: " + book.getString("author"));
             has.setText("Possui: " + book.getString("has"));
-            rating.setText("Opinião: " + book.getString("rating"));
-            synopsis.setText("Descrição: " + book.getString("synopsis"));
+            rating.setText(book.getString("rating"));
+            synopsis.setText(book.getString("synopsis"));
 
             String image = book.getString("image");
             if (image != null && image != "") {

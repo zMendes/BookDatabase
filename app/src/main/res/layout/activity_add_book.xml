@@ -54,6 +54,7 @@
             android:layout_marginStart="160sp"
             android:layout_marginTop="-120sp"
             android:text="Autor:"
+            android:textColor="#000000"
             android:textSize="22sp"/>
         <EditText
             android:id="@+id/author"
@@ -65,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="160sp"
+            android:textColor="#000000"
             android:layout_marginTop="20sp"
             android:text="Gênero:"
             android:textSize="22sp"/>
@@ -81,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="160sp"
             android:layout_marginTop="20sp"
+            android:textColor="#000000"
             android:text="Possui:"
             android:textSize="22sp"/>
         <EditText
@@ -93,6 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sinopse:"
+            android:textColor="#000000"
             android:layout_marginTop="20sp"
             android:textSize="22sp"/>
         <EditText
@@ -105,6 +109,7 @@
             android:layout_height="wrap_content"
             android:text="Comentário:"
             android:layout_marginTop="20sp"
+            android:textColor="#000000"
             android:textSize="22sp"/>
         <EditText
             android:id="@+id/rating"

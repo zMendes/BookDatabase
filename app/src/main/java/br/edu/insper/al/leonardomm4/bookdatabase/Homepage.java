@@ -103,6 +103,8 @@ public class Homepage extends AppCompatActivity {
                 e.printStackTrace();
             }
             RefreshList();
+            Toast toast = Toast.makeText(getApplicationContext(), "Sorting by: title", Toast.LENGTH_SHORT);
+            toast.show();
             sorted = false;
             }
             else {
@@ -138,6 +140,8 @@ public class Homepage extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 RefreshList();
+                Toast toast = Toast.makeText(getApplicationContext(), "Sorting by: author", Toast.LENGTH_SHORT);
+                toast.show();
                 sorted = true;
             }
 
