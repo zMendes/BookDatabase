@@ -102,6 +102,8 @@ public class BookPage extends AppCompatActivity {
                 if (bitmap != null) {
                     // ImageView edit = findViewById(R.id.image_example);
                     cover.setImageBitmap(bitmap);
+                    cover.setMinimumHeight(200);
+
                 }
             }
         } catch (JSONException e) {
