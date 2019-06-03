@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -50,7 +52,7 @@ public class EditPage extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CAMERA = 101;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 102;
 
-    private ImageView icon;
+    private TextView icon;
 
 
     @Override
@@ -99,6 +101,7 @@ public class EditPage extends AppCompatActivity {
             rating.setText(book.getString("rating"));
             synopsis.setText(book.getString("synopsis"));
             String image = book.getString("image");
+            lastPath = image;
             if (image != null && image != "") {
                 // Descobre a URI do último arquivo que foi criado. Aqui não usamos
                 // a URI do provedor de arquivos porque o uso dele é apenas local.
@@ -107,7 +110,10 @@ public class EditPage extends AppCompatActivity {
                 // Carrega uma imagem a partir da URI, se possível.
                 Bitmap bitmap;
                 try {
+                    ExifInterface exif = new ExifInterface(uri.getPath());
+                    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    bitmap = rotateBitmap(bitmap, orientation);
                 } catch (IOException exception) {
                     bitmap = null;
                 }
@@ -252,6 +258,7 @@ public class EditPage extends AppCompatActivity {
             // Carrega uma imagem a partir da URI, se possível.
             Bitmap bitmap;
             try {
+
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
             } catch (IOException exception) {
                 bitmap = null;
@@ -324,6 +331,48 @@ public class EditPage extends AppCompatActivity {
             }
             // other 'case' lines to check for other
             // permissions this app might request.
+        }
+    }
+    private static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
+        Matrix matrix = new Matrix();
+        switch (orientation) {
+            case ExifInterface.ORIENTATION_NORMAL:
+                return bitmap;
+            case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+                matrix.setScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                matrix.setRotate(180);
+                break;
+            case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+                matrix.setRotate(180);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_TRANSPOSE:
+                matrix.setRotate(90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                matrix.setRotate(90);
+                break;
+            case ExifInterface.ORIENTATION_TRANSVERSE:
+                matrix.setRotate(-90);
+                matrix.postScale(-1, 1);
+                break;
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                matrix.setRotate(-90);
+                break;
+            default:
+                return bitmap;
+        }
+        try {
+            Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            bitmap.recycle();
+
+            return bmRotated;
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

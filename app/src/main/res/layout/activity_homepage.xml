@@ -12,6 +12,7 @@
 
 
     <TextView
+        android:id="@+id/icon"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_marginTop="-10sp"
@@ -24,7 +25,6 @@
         />
 
         <ImageView
-            android:id="@+id/icon"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:src="@drawable/icon"
@@ -36,13 +36,13 @@
         android:layout_width="30sp"
         android:layout_height="30sp"
         android:src="@drawable/about"
-        android:layout_marginTop="-30sp"
+        android:layout_marginTop="-34sp"
         />
     <ImageView
         android:layout_width="35sp"
         android:layout_height="35sp"
         android:src="@drawable/search"
-        android:layout_marginTop="-32sp"
+        android:layout_marginTop="-36sp"
         android:layout_marginStart="320sp"
         />
 
@@ -68,14 +68,14 @@
     <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
-        android:layout_height="607sp"
+        android:layout_height="560sp"
         android:numColumns="3"/>
 
     <TextView
         android:id="@+id/nlivros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-40sp"
+        android:layout_marginTop="20sp"
         android:layout_marginStart="270sp"
         android:textColor="#444"
         android:textSize="16sp"
@@ -92,7 +92,7 @@
 
     <ImageView
         android:id="@+id/add"
-        android:layout_marginTop="-60sp"
+        android:layout_marginTop="-50sp"
         android:layout_width="60sp"
         android:layout_height="60sp"
         android:layout_marginStart="145sp"

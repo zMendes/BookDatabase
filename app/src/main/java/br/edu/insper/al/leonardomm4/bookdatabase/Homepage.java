@@ -34,7 +34,7 @@ public class Homepage extends AppCompatActivity {
 
 
     private ImageView sortName;
-    private ImageView icon;
+    private TextView icon;
     private ImageView about;
     private ImageView add;
     private CheckBox checkBox;
@@ -265,9 +265,10 @@ public class Homepage extends AppCompatActivity {
             for (int i = 0; i < livros.length(); i++) {
                 nbooks++;
                 JSONObject book = livros.getJSONObject(i);
-                String aut = book.getString("name");
+                String aut = book.getString("author");
 
                 if (!(listauthors.contains(aut))) {
+                    System.out.println(aut);
                     nauthors++;
                     listauthors.add(aut);
                 }
