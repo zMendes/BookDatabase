@@ -49,6 +49,8 @@ public class AddPage extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CAMERA = 101;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 102;
 
+    private ImageView icon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,11 @@ public class AddPage extends AppCompatActivity {
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         confirm = findViewById(R.id.confirm);
+        icon = findViewById(R.id.icon);
+        icon.setOnClickListener(view -> {
+            Intent intent = new Intent(this, Homepage.class);
+            startActivity(intent);
+        });
 
         title.setHint("digite aqui");
         genre.setHint("digite aqui");

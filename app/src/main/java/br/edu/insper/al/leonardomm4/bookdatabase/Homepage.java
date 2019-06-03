@@ -34,7 +34,7 @@ public class Homepage extends AppCompatActivity {
 
 
     private ImageView sortName;
-
+    private ImageView icon;
     private ImageView about;
     private ImageView add;
     private CheckBox checkBox;
@@ -57,6 +57,12 @@ public class Homepage extends AppCompatActivity {
         gridView = findViewById(R.id.gv);
         nautor = findViewById(R.id.nautores);
         nlivros = findViewById(R.id.nlivros);
+
+        icon = findViewById(R.id.icon);
+        icon.setOnClickListener(view -> {
+            Intent intent = new Intent(this, Homepage.class);
+            startActivity(intent);
+        });
 
 
         sorted = true;
@@ -96,7 +102,6 @@ public class Homepage extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            System.out.println("By nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
             RefreshList();
             sorted = false;
             }
@@ -134,7 +139,6 @@ public class Homepage extends AppCompatActivity {
                 }
                 RefreshList();
                 sorted = true;
-                System.out.println("By authooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor");
             }
 
 
@@ -269,8 +273,8 @@ public class Homepage extends AppCompatActivity {
         catch(JSONException e){
                 e.printStackTrace();
             }
-        nlivros.setText("# Books: "+nbooks);
-        nautor.setText("# Authors: "+nauthors);
+        nlivros.setText("Livros: "+nbooks);
+        nautor.setText("Autores: "+nauthors);
     }
 
 

@@ -32,6 +32,7 @@ public class BookPage extends AppCompatActivity {
     private ImageView edit;
     private ImageView remove;
     private ImageView cover;
+    private ImageView icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,12 @@ public class BookPage extends AppCompatActivity {
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         cover = findViewById(R.id.cover);
+        icon = findViewById(R.id.icon);
+        icon.setOnClickListener(view -> {
+            Intent intent = new Intent(this, Homepage.class);
+            startActivity(intent);
+        });
+
 
 
         int id;

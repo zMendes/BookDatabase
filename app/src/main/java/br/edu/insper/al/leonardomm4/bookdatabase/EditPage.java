@@ -44,10 +44,14 @@ public class EditPage extends AppCompatActivity {
     private ImageView edit;
     private ImageView confirm;
     private String lastPath;
+
     private static final int CAMERA_REQUEST_CODE = 1;
     private static final int GALLERY_REQUEST_CODE = 2;
     private static final int PERMISSION_REQUEST_CAMERA = 101;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 102;
+
+    private ImageView icon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,11 @@ public class EditPage extends AppCompatActivity {
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         confirm = findViewById(R.id.confirm);
+        icon = findViewById(R.id.icon);
+        icon.setOnClickListener(view -> {
+            Intent intent = new Intent(this, Homepage.class);
+            startActivity(intent);
+        });
 
 
         int id;

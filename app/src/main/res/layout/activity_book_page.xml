@@ -27,23 +27,34 @@
         android:fontFamily="@font/montserrat"
         />
 
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:src="@drawable/icon"
+            android:layout_marginTop="-42sp"
+            android:layout_marginStart="88sp"/>
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="30sp"
+        android:layout_marginStart="20sp"
+        android:textColor="#000000"
         tools:ignore="InvalidId" />
     
     <ImageView
         android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
         android:layout_marginStart="320sp"
         android:src="@drawable/edit"/>
+
     <ImageView
         android:id="@+id/remove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30sp"
+        android:layout_height="30sp"
         android:layout_marginStart="270sp"
         android:layout_marginTop="-30sp"
         android:src="@drawable/remove"/>
@@ -65,7 +76,7 @@
         android:layout_marginTop="-120sp"
         android:textSize="22sp"/>
 
-    <TextView
+        <TextView
         android:id="@+id/genre"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
