@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -37,14 +38,19 @@ public class Homepage extends AppCompatActivity {
     private TextView icon;
     private ImageView about;
     private ImageView add;
+    private Button search;
     private CheckBox checkBox;
 
     private TextView nautor;
     private TextView nlivros;
 
+    private EditText searchbar;
+    private String searchkey;
+
     private int picture = R.drawable.ic_launcher_background;
 
     private Boolean sorted;
+    private Boolean searching;
 
 
 
@@ -58,6 +64,11 @@ public class Homepage extends AppCompatActivity {
         nautor = findViewById(R.id.nautores);
         nlivros = findViewById(R.id.nlivros);
 
+        search = findViewById(R.id.search_button);
+        searchbar = findViewById(R.id.search_enter);
+
+        gridView = findViewById(R.id.gv);
+
         icon = findViewById(R.id.icon);
         icon.setOnClickListener(view -> {
             Intent intent = new Intent(this, Homepage.class);
@@ -66,6 +77,8 @@ public class Homepage extends AppCompatActivity {
 
 
         sorted = true;
+        searching = false;
+        searchkey = null;
 
         sortName = findViewById(R.id.sortName);
         sortName.setOnClickListener(view -> {
@@ -170,6 +183,19 @@ public class Homepage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        search.setOnClickListener(view -> {
+            ///aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            searchkey = searchbar.getText().toString();
+            if (searchkey != null) {
+                searching = true;
+            }
+            else {
+                searching = false;
+            }
+
+            RefreshList();
+        });
+
         RefreshList();
 
 
@@ -214,18 +240,37 @@ public class Homepage extends AppCompatActivity {
                 String imageFile = book.optString("image");
 
                 int picture = R.drawable.cover;
-                if (checkBox.isChecked()) {
-                    if (book.getBoolean("has")) {
+                if (searching) {
+                    if ((builders.get(i).toString().contains(searchkey)) || (builders2.get(i).toString().contains(searchkey))) {
+                        if (checkBox.isChecked()) {
+                            if (book.getBoolean("has")) {
 
-                        Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
+                                Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
+                                item.setbookImageFile(imageFile);
+                                bookList.add(item);
+                            }
+                        } else {
+                            Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
+                            item.setbookImageFile(imageFile);
+                            bookList.add(item);
+
+                        }
+                    }
+                }
+                else {
+                    if (checkBox.isChecked()) {
+                        if (book.getBoolean("has")) {
+
+                            Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
+                            item.setbookImageFile(imageFile);
+                            bookList.add(item);
+                        }
+                    } else {
+                        Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
                         item.setbookImageFile(imageFile);
                         bookList.add(item);
-                    }
-                } else {
-                    Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
-                    item.setbookImageFile(imageFile);
-                    bookList.add(item);
 
+                    }
                 }
 
             }
@@ -281,6 +326,8 @@ public class Homepage extends AppCompatActivity {
         nlivros.setText("Livros: "+nbooks);
         nautor.setText("Autores: "+nauthors);
     }
+
+
 
 
     public void goToPage(int id) {
