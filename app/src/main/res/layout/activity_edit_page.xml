@@ -118,7 +118,7 @@
             android:id="@+id/confirm"
             android:layout_width="60sp"
             android:layout_height="60sp"
-            android:src="@drawable/confirm"
+            android:src="@drawable/sharp_check_circle_24"
             android:layout_marginStart="145sp"/>
     </LinearLayout>
 </ScrollView>
