@@ -41,7 +41,7 @@ public class AddPage extends AppCompatActivity {
     private TextView title;
     private EditText genre;
     private EditText author;
-    private CheckBox has;
+    private CheckBox     has;
     private EditText synopsis;
     private EditText rating;
     private ImageView edit;
