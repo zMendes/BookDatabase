@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".AddPage"></activity>
+        <activity android:name=".AddPage"
+            android:screenOrientation="portrait" />
         <activity android:name=".EditPage"
             android:screenOrientation="portrait"/>
         <activity android:name=".About"
