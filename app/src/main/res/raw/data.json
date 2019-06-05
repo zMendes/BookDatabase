@@ -8,7 +8,8 @@
 				"has": true,
 				"synopsis": "Harry é um garoto cujos pais, feiticeiros, foram assassinados por um poderosíssimo bruxo quando ele ainda era bebê. Ele foi levado, então, para a casa dos tios que não tinham relação com magia. No dia de seu aniversário de 11 anos, sua vida inteira mudou.",
 				"rating": "Livro incrível, história super emocionante, personagens apaixonantes.",
-				"where": "Minha casa quando eu era criança."
+				"where": "Minha casa quando eu era criança.",
+				"image": null
 			},
 			{
 				"name": "Uncharted - o Quarto labirinto",
@@ -17,7 +18,8 @@
 				"has": true,
 				"synopsis": "O arqueólogo Luka Hzujak, especialista em labirintos mitológicos, acaba de ser assassinado. Seu corpo, esquartejado, é encontrado dentro de uma mala numa estação de Nova York. Para descobrir quem fez isso a um de seus melhores amigos, Victor Sullivan, um amante de charutos que dedica sua vida a “aquisições praticamente impossíveis de antiguidades”, pede ajuda ao caçador de tesouros Nathan Drake, seu pupilo e companheiro de peripécias. Junto com Jada, a filha do arqueólogo morto, Sully e Drake vão enfrentar a maior aventura de suas vidas.",
 				"rating": "Para quem gosta dos jogos da saga Uncharted, esse livro é uma boa maneira de conhecer mais o mundo de Nathan Drake.",
-				"where": "Online."
+				"where": "Online.",
+				"image": null
 			},
 			{
 				"name": "O Príncipe",
@@ -26,7 +28,8 @@
 				"has": false,
 				"synopsis": "A grandeza e originalidade de 'O Príncipe' consiste em ter alargado o campo da ciência na política, distinguindo os interesses políticos primários das classes, mas confundindo-os, ao mesmo tempo, em uma monstruosa razão de Estado pela qual o povo é apenas matéria plástica nas mãos do Príncipe.",
 				"rating": "Livro complexo de mais para eu compreender.",
-				"where": "Livraria."
+				"where": "Livraria.",
+				"image": null
 			},
 			{
 				"name": "Zac Power 1 - Ilha do Veneno",
@@ -35,7 +38,8 @@
 				"has": true,
 				"synopsis": "Zac Power tem 12 anos e um trabalho muito incomum: ele é um agente secreto da Agência de Investigação do Governo (AIG). Mas, além de incríveis missões, ele ainda tem que se virar com a escola e com as tarefas de casa. Nesta aventura, ele parte para uma missão numa das ilhas mais perigosas do mundo, a Ilha do Veneno. Lá, ele precisa encontrar a fórmula da Solução X, criada pelo cientista malvado dr. Drástico, e salvar a vida de seu irmão. Será que ele vai conseguir?",
 				"rating": "Livro empolgante que li quando criança.",
-				"where": "Escola."
+				"where": "Escola.",
+				"image": null
 			},
 			{				
 				"name": "O livro do chá",
@@ -44,7 +48,8 @@
 				"has": false,
 				"synopsis": "Esta obra foi escrita em inglês com o objetivo de levá-la ao maior número de leitores. Muito mais do que um livro explicativo sobre chanoyu, a cerimônia do chá, trata-se de um texto reflexivo, que conduz o leitor, por meio da compreensão do cerimonial, a uma profundidade a princípio insuspeitada: por trás da cerimônia do chá estão o taoísmo, o zen, todo um arcabouço filosófico que é anterior à sua face ritualística.",
 				"rating": "Livro muito bom que me fez compreender o signficado por trás da cerimônia do chá.",
-				"where": "Café."
+				"where": "Café.",
+				"image": null
 			},
 			{				
 				"name": "A Game of Thrones",
@@ -53,7 +58,8 @@
 				"has": false,
 				"synopsis": "A guerra dos tronos é o primeiro livro da série best-seller internacional As Crônicas de Gelo e Fogo, que deu origem à adaptação de sucesso da HBO, Game of Thrones. O verão pode durar décadas. O inverno, toda uma vida. E a guerra dos tronos começou. Como Guardião do Norte, lorde Eddard Stark não fica feliz quando o rei Robert o proclama a nova Mão do Rei. Sua honra o obriga a aceitar o cargo e deixar seu posto em Winterfell para rumar para a corte, onde os homens fazem o que lhes convém, não o que devem... e onde um inimigo morto é algo a ser admirado.",
 				"rating": "Livro muito bom, um dos melhores livros da saga. Final inesperado.",
-				"where": "Casa."
+				"where": "Casa.",
+				"image": null
 			},
 			{				
 				"name": "Harry Potter e a Câmara Secreta",
@@ -62,7 +68,8 @@
 				"has": true,
 				"synopsis": "Depois de férias aborrecidas na casa dos tios trouxas, está na hora de Harry Potter voltar a estudar. Coisas acontecem, no entanto, para dificultar o regresso de Harry. Persistente e astuto, o herói não se deixa intimidar pelos obstáculos e, com a ajuda dos fiéis amigos Weasley, começa o ano letivo na Escola de Magia e Bruxaria de Hogwarts. As novidades não são poucas. Novos colegas, novos professores, muitas e boas descobertas e um grande e perigosos desafio. Alguém ou alguma coisa ameaça a segurança e a tranquilidade dos membros de Hogwarts.",
 				"rating": "Gostei da expansão da história dos Weasley, no entanto, aindo prefiro o primeiro.",
-				"where": "Escola, quando criança."
+				"where": "Escola, quando criança.",
+				"image": null
 			},
 			{				
 				"name": "Harry Potter e o Prisioneiro de Askaban",
@@ -71,7 +78,8 @@
 				"has": true,
 				"synopsis": "As aulas estão de volta à Hogwarts e Harry Potter não vê a hora de embarcar no expresso a vapor que o levará de volta à escola de bruxaria. Mais uma vez suas férias na rua dos Alfeneiros foi triste e solitária. Com muita ação, humor e magia, 'Harry Potter e o prisioneiro de Azkaban' traz de volta o gigante atrapalhado Rúbeo Hagrid, o sábio diretor Alvo Dumbledore, a exigente professora de transformação Minerva MacGonagall e o novo mestre Lupin, que guarda grandes surpresas para Harry.",
 				"rating": "Eles estão mais adultos, problemas maiores. Gostei muito do tom mais sombria visto nesse livro.",
-				"where": "Casa, quando criança."
+				"where": "Casa, quando criança.",
+				"image": null
 			},
 			{				
 				"name": "Harry Potter e o Cálice de Fogo",
@@ -80,7 +88,8 @@
 				"has": false,
 				"synopsis": "Neste 4° volume das aventuras de Harry Potter, nosso herói, cansado das férias de verão, não vê a hora de começar o ano letivo. Já é o quarto ano na Escola de Feitiçaria e Bruxaria Hogwarts. Claro, há muitos novos feitiços, poções para serem experimentadas e aulas de adivinhação. Harry Potter está ansioso pelos novos aprendizados. Entretanto, acontecimentos inesperados já estão a caminho... Esta é mais uma aventura de Harry Potter, preparada por J. K. Rowling, uma escritora genial.",
 				"rating": "Não gostei muito de como aconteceu o retorno de Voldermort, mas o Torneio Tribruxo (Quadri) foi muito intenso e bem desenvolvido.",
-				"where": "Casa da minha vó no RJ."
+				"where": "Casa da minha vó no RJ.",
+				"image": null
 			},
 			{				
 				"name": "Harry Potter e a Ordem da Fênix",
@@ -89,7 +98,8 @@
 				"has": true,
 				"synopsis": "Harry Potter vai começar seu quinto ano na Escola de Magia e Bruxaria de Hogwarts. Está desesperado para retornar à escola e descobrir por que seus melhores amigos, Rony e Hermione, andaram tão misteriosos durante as férias. Porém, o que o jovem bruxo está prestes a descobrir nesse novo ano em Hogwarts vai provocar uma grande reviravolta em seu mundo.",
 				"rating": "Odeio Dolores Umbridge.",
-				"where": "Minha casa quando era adolescente."
+				"where": "Minha casa quando era adolescente.",
+				"image": null
 			},
 			{				
 				"name": "Harry Potter e a Enigma do Príncipe",
@@ -98,7 +108,8 @@
 				"has": true,
 				"synopsis": "Harry Potter e o Enigma do Príncipe dá continuidade à saga do jovem bruxo Harry Potter a partir do ponto onde o livro anterior parou, o momento em que fica provado que o poder de Voldemort e dos Comensais da Morte, seus seguidores, cresce mais a cada dia, em meio à batalha entre o bem e o mal. A onda de terror provocada pelo Lorde das Trevas estaria afetando, até mesmo, o mundo dos trouxas (não-bruxos), e sendo agravada pela ação dos dementadores, criaturas mágicas aterrorizantes que “sugam” a esperança e a felicidade das pessoas. Harry, que acabou de completar 16 anos, parte rumo ao sexto ano na Escola de Magia e Bruxaria de Hogwarts, animado e, ao mesmo tempo, apreensivo com a perspectiva de ter aulas particulares com o professor Dumbledore, o diretor da escola e o bruxo mais respeitado em toda comunidade mágica.",
 				"rating": "Pior livro da saga até o momento, não gostei da mudança repentina da personalidade de Dumbledore e achei o flow do livro bem diferente dos outros.",
-				"where": "Minha casa."
+				"where": "Minha casa.",
+				"image": null
 			},
 						{				
 				"name": "Harry Potter e as Relíqueas da Morte",
@@ -107,7 +118,8 @@
 				"has": true,
 				"synopsis": "Desta vez, Harry Potter foi encarregado de uma tarefa obscura, perigosa e aparentemente impossível: localizar e destruir os Horcruxes remanescentes de Voldemort. Potter nunca esteve tão sozinho nem teve de enfrentar um futuro tão sombrio. Porém, de algum modo, Harry deve encontrar dentro de si próprio a força para completar a tarefa que lhe foi dada: ele deve sair do ambiente acolhedor e seguro da Toca para seguir sem temor nem hesitação pelo inexorável caminho que lhe foi traçado... Na sétima e última parte da saga de Harry Potter, J.K. Rowling revela de modo espetacular respostas que há muito são esperadas. A encantadora e elaborada narrativa, com guinadas repentinas em compassos de tirar o fôlego, confirma a autora como uma grande contadora de histórias cujos livros serão lidos, re-lidos e lidos mais uma vez.",
 				"rating": "Final merecido para o fim da saga Harry Potter. Sentirei falta tanto do universo quanto dos personagens. Bom livro.",
-				"where": "Minha casa."
+				"where": "Minha casa.",
+				"image": null
 			}
 	]
 }

@@ -237,7 +237,6 @@ public class EditPage extends AppCompatActivity {
                 } else {
                     book.put("has", false);
                 }
-
                 book.put("rating", rating.getText().toString());
                 book.put("synopsis", synopsis.getText().toString());
                 book.put("image", lastPath);

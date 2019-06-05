@@ -52,7 +52,7 @@ public class Homepage extends AppCompatActivity {
     private int picture = R.drawable.cover;
 
     private Boolean sorted;
-    private Boolean searching;
+
     private Boolean searchview;
 
 
@@ -80,7 +80,7 @@ public class Homepage extends AppCompatActivity {
 
 
         sorted = true;
-        searching = false;
+
         searchkey = null;
         searchview = false;
 
@@ -207,15 +207,7 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 searchkey = searchbar.getText().toString().toLowerCase();
-                if (searchkey != null) {
-                    searching = true;
-                } else {
-                    searching = false;
-                }
-
                 RefreshList();
-
-
             }
 
             @Override
@@ -248,8 +240,6 @@ public class Homepage extends AppCompatActivity {
             json_f = loadData() ;
         }
 
-        //LinkedList<StringBuilder> builders = new LinkedList<>();
-        //LinkedList<StringBuilder> builders2 = new LinkedList<>();
 
         try {
 
@@ -259,14 +249,12 @@ public class Homepage extends AppCompatActivity {
             JSONArray books = data.getJSONArray("books");
 
             for(int i=0; i<books.length(); i++){
-                //int i2 = 2;
-                //builders.add(new StringBuilder());
-                //builders2.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
 
 
                 int picture = R.drawable.cover;
-                if (searching) {
+                if (searchkey != null) {
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     if ((book.getString("name").toLowerCase().contains(searchkey)) || (book.getString("author").toLowerCase().contains(searchkey))) {
                         parseBook(book,i);
                     }

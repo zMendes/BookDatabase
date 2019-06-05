@@ -88,9 +88,9 @@
             android:id="@+id/has"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="162sp"
-            android:layout_marginTop="20sp"
             android:layoutDirection="rtl"
+            android:layout_marginLeft="162dp"
+            android:layout_marginTop="20sp"
             android:text="Possui: "
             android:textColor="#000000"
             android:textSize="22sp" />
