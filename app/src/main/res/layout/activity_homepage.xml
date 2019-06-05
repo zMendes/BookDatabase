@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,12 +64,26 @@
         android:text="Somente possuidos:"
         android:onClick="onCheckboxClicked"/>
 
+        <EditText
+            android:id="@+id/search_enter"
+            android:layout_width="280sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:textSize="20sp"
+            tools:ignore="InvalidId" />
 
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-40sp"
+            android:layout_marginStart="300sp"
+            android:text="Search" />
 
-    <GridView
+        <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
-        android:layout_height="560sp"
+        android:layout_height="520sp"
         android:numColumns="3"/>
 
     <TextView
