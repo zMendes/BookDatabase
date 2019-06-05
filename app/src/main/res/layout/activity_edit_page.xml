@@ -91,9 +91,9 @@
             android:layoutDirection="rtl"
             android:layout_marginLeft="162dp"
             android:layout_marginTop="20sp"
-            android:text="Possui:"
+            android:text="Possui: "
             android:textColor="#000000"
-            android:textSize="22sp"/>
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
