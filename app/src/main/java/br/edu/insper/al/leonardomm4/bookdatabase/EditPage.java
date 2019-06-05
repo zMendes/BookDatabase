@@ -64,6 +64,7 @@ public class EditPage extends AppCompatActivity {
         edit = findViewById(R.id.edit);
         genre = findViewById(R.id.genre);
         author = findViewById(R.id.author);
+        has = findViewById(R.id.has);
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         confirm = findViewById(R.id.confirm);
@@ -88,6 +89,7 @@ public class EditPage extends AppCompatActivity {
 
         String json = loadData();
         try {
+            System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
 
             JSONObject root = new JSONObject(json);
             JSONObject data = root.getJSONObject("database");
@@ -99,16 +101,21 @@ public class EditPage extends AppCompatActivity {
             author.setText(book.getString("author"));
             rating.setText(book.getString("rating"));
             synopsis.setText(book.getString("synopsis"));
+            has.setChecked(book.getBoolean("has"));
+
+
             String image = book.getString("image");
             lastPath = image;
-            has = findViewById(R.id.has);
-            if ((book.getString("has").equals("true"))){
+
+            /*if ((book.getBoolean("has"))){
                 has.setChecked(true);
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             }
             else{
                 has.setChecked(false);
-            }
+                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
 
+            }*/
 
 
             if (image != null && image != "") {
