@@ -38,7 +38,7 @@ public class Homepage extends AppCompatActivity {
     private TextView icon;
     private ImageView about;
     private ImageView add;
-    private Button search;
+    private ImageView searchicon;
     private CheckBox checkBox;
 
     private TextView nautor;
@@ -51,6 +51,7 @@ public class Homepage extends AppCompatActivity {
 
     private Boolean sorted;
     private Boolean searching;
+    private Boolean searchview;
 
 
 
@@ -64,7 +65,7 @@ public class Homepage extends AppCompatActivity {
         nautor = findViewById(R.id.nautores);
         nlivros = findViewById(R.id.nlivros);
 
-        search = findViewById(R.id.search_button);
+        searchicon = findViewById(R.id.search_icon);
         searchbar = findViewById(R.id.search_enter);
 
         gridView = findViewById(R.id.gv);
@@ -79,6 +80,7 @@ public class Homepage extends AppCompatActivity {
         sorted = true;
         searching = false;
         searchkey = null;
+        searchview = false;
 
         sortName = findViewById(R.id.sortName);
         sortName.setOnClickListener(view -> {
@@ -183,7 +185,17 @@ public class Homepage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        search.setOnClickListener(view -> {
+        searchicon.setOnClickListener(view -> {
+            if (searchview) {
+                searchview = false;
+                searchbar.setVisibility(View.VISIBLE);
+            } else {
+                searchview = true;
+                searchbar.setVisibility(View.GONE);
+            }
+        });
+
+        searchbar.setOnClickListener(view -> {
             ///aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
             searchkey = searchbar.getText().toString().toLowerCase();
             if (searchkey != null) {
