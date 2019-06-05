@@ -9,7 +9,7 @@ public class Rotator {
     public Rotator() {
     }
 
-    public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
+    public  static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
         Matrix matrix = new Matrix();
         switch (orientation) {
             case ExifInterface.ORIENTATION_NORMAL:
