@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class EditPage extends AppCompatActivity {
     private EditText title;
     private EditText genre;
     private EditText author;
-    private EditText has;
+    private CheckBox has;
     private EditText synopsis;
     private EditText rating;
     private ImageView edit;
@@ -88,7 +89,6 @@ public class EditPage extends AppCompatActivity {
 
         String json = loadData();
         try {
-
             JSONObject root = new JSONObject(json);
             JSONObject data = root.getJSONObject("database");
             JSONArray books = data.getJSONArray("books");
@@ -97,11 +97,15 @@ public class EditPage extends AppCompatActivity {
             title.setText(book.getString("name"));
             genre.setText(book.getString("genre"));
             author.setText(book.getString("author"));
-            has.setText(book.getString("has"));
             rating.setText(book.getString("rating"));
             synopsis.setText(book.getString("synopsis"));
+            has.setChecked(book.getBoolean("has"));
+
+
             String image = book.getString("image");
             lastPath = image;
+
+
             if (image != null && image != "") {
                 // Descobre a URI do último arquivo que foi criado. Aqui não usamos
                 // a URI do provedor de arquivos porque o uso dele é apenas local.
@@ -221,7 +225,12 @@ public class EditPage extends AppCompatActivity {
                 book.put("name", title.getText().toString());
                 book.put("genre", genre.getText().toString());
                 book.put("author", author.getText().toString());
-                book.put("has", has.getText().toString());
+                if (has.isChecked()){
+                    book.put("has", true);
+                } else {
+                    book.put("has", false);
+                }
+
                 book.put("rating", rating.getText().toString());
                 book.put("synopsis", synopsis.getText().toString());
                 book.put("image", lastPath);

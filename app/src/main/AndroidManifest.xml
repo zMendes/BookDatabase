@@ -15,10 +15,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".AddPage"></activity>
-        <activity android:name=".EditPage" />
-        <activity android:name=".About" />
-        <activity android:name=".BookPage" />
-        <activity android:name=".Homepage">
+        <activity android:name=".EditPage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".About"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".BookPage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Homepage"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

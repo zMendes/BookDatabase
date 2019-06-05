@@ -81,9 +81,14 @@ public class BookPage extends AppCompatActivity {
             title.setText(book.getString("name"));
             genre.setText("Categoria: " + book.getString("genre"));
             author.setText("Autor: " + book.getString("author"));
-            has.setText("Possui: " + book.getString("has"));
             rating.setText(book.getString("rating"));
             synopsis.setText(book.getString("synopsis"));
+            if ((book.getString("has")).equals("true")){
+                has.setText("Possui: " + "Sim");
+            }
+            else{
+                has.setText("Possui: " + "Não");
+            }
 
             String image = book.getString("image");
             if (image != null && image != "") {
