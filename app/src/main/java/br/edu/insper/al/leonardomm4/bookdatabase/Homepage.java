@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -47,7 +49,7 @@ public class Homepage extends AppCompatActivity {
     private EditText searchbar;
     private String searchkey;
 
-    private int picture = R.drawable.ic_launcher_background;
+    private int picture = R.drawable.cover;
 
     private Boolean sorted;
     private Boolean searching;
@@ -173,9 +175,18 @@ public class Homepage extends AppCompatActivity {
             checkBox.setChecked(false);
         }
 
-
+        searchicon.setOnClickListener(view -> {
+            if (!searchview) {
+                searchview = true;
+                searchbar.setVisibility(View.VISIBLE);
+            } else {
+                searchview = false;
+                searchbar.setVisibility(View.GONE);
+            }
+        });
 
         about.setOnClickListener(view -> {
+
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
         });
@@ -185,27 +196,32 @@ public class Homepage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        searchicon.setOnClickListener(view -> {
-            if (searchview) {
-                searchview = false;
-                searchbar.setVisibility(View.VISIBLE);
-            } else {
-                searchview = true;
-                searchbar.setVisibility(View.GONE);
-            }
-        });
 
-        searchbar.setOnClickListener(view -> {
-            ///aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            searchkey = searchbar.getText().toString().toLowerCase();
-            if (searchkey != null) {
-                searching = true;
-            }
-            else {
-                searching = false;
+
+        searchbar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
-            RefreshList();
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchkey = searchbar.getText().toString().toLowerCase();
+                if (searchkey != null) {
+                    searching = true;
+                } else {
+                    searching = false;
+                }
+
+                RefreshList();
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
 
         RefreshList();

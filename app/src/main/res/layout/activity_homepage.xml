@@ -26,7 +26,7 @@
         />
 
         <ImageView
-            android:id="@+id/search_icon"
+            android:id="@+id/logo"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:src="@drawable/icon"
@@ -41,6 +41,7 @@
         android:layout_marginTop="-34sp"
         />
     <ImageView
+        android:id="@+id/search_icon"
         android:layout_width="35sp"
         android:layout_height="35sp"
         android:src="@drawable/search"
@@ -50,7 +51,7 @@
 
         <EditText
             android:id="@+id/search_enter"
-            android:layout_width="280sp"
+            android:layout_width="310sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20sp"
             android:textSize="20sp"
