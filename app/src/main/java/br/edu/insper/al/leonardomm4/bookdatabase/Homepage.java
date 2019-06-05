@@ -185,7 +185,7 @@ public class Homepage extends AppCompatActivity {
 
         search.setOnClickListener(view -> {
             ///aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            searchkey = searchbar.getText().toString();
+            searchkey = searchbar.getText().toString().toLowerCase();
             if (searchkey != null) {
                 searching = true;
             }
@@ -241,7 +241,7 @@ public class Homepage extends AppCompatActivity {
 
                 int picture = R.drawable.cover;
                 if (searching) {
-                    if ((builders.get(i).toString().contains(searchkey)) || (builders2.get(i).toString().contains(searchkey))) {
+                    if ((builders.get(i).toString().toLowerCase().contains(searchkey)) || (builders2.get(i).toString().toLowerCase().contains(searchkey))) {
                         if (checkBox.isChecked()) {
                             if (book.getBoolean("has")) {
 
