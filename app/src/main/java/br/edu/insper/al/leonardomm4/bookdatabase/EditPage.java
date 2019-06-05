@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,7 +41,7 @@ public class EditPage extends AppCompatActivity {
     private EditText title;
     private EditText genre;
     private EditText author;
-    private EditText has;
+    private CheckBox has;
     private EditText synopsis;
     private EditText rating;
     private ImageView edit;
@@ -97,7 +98,9 @@ public class EditPage extends AppCompatActivity {
             title.setText(book.getString("name"));
             genre.setText(book.getString("genre"));
             author.setText(book.getString("author"));
-            has.setText(book.getString("has"));
+            if ((book.getString("has").equals("Sim"))){
+                has.isChecked();
+            }
             rating.setText(book.getString("rating"));
             synopsis.setText(book.getString("synopsis"));
             String image = book.getString("image");
@@ -221,7 +224,12 @@ public class EditPage extends AppCompatActivity {
                 book.put("name", title.getText().toString());
                 book.put("genre", genre.getText().toString());
                 book.put("author", author.getText().toString());
-                book.put("has", has.getText().toString());
+                if (has.isChecked()){
+                    book.put("has", "Sim");
+                } else {
+                    book.put("has", "Não");
+                }
+
                 book.put("rating", rating.getText().toString());
                 book.put("synopsis", synopsis.getText().toString());
                 book.put("image", lastPath);
