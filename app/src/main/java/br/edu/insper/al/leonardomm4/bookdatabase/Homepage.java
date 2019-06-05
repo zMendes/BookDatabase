@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -38,7 +40,7 @@ public class Homepage extends AppCompatActivity {
     private TextView icon;
     private ImageView about;
     private ImageView add;
-    private Button search;
+    private ImageView searchicon;
     private CheckBox checkBox;
 
     private TextView nautor;
@@ -47,10 +49,11 @@ public class Homepage extends AppCompatActivity {
     private EditText searchbar;
     private String searchkey;
 
-    private int picture = R.drawable.ic_launcher_background;
+    private int picture = R.drawable.cover;
 
     private Boolean sorted;
     private Boolean searching;
+    private Boolean searchview;
 
 
 
@@ -64,7 +67,7 @@ public class Homepage extends AppCompatActivity {
         nautor = findViewById(R.id.nautores);
         nlivros = findViewById(R.id.nlivros);
 
-        search = findViewById(R.id.search_button);
+        searchicon = findViewById(R.id.search_icon);
         searchbar = findViewById(R.id.search_enter);
 
         gridView = findViewById(R.id.gv);
@@ -79,6 +82,7 @@ public class Homepage extends AppCompatActivity {
         sorted = true;
         searching = false;
         searchkey = null;
+        searchview = false;
 
         sortName = findViewById(R.id.sortName);
         sortName.setOnClickListener(view -> {
@@ -171,9 +175,18 @@ public class Homepage extends AppCompatActivity {
             checkBox.setChecked(false);
         }
 
-
+        searchicon.setOnClickListener(view -> {
+            if (!searchview) {
+                searchview = true;
+                searchbar.setVisibility(View.VISIBLE);
+            } else {
+                searchview = false;
+                searchbar.setVisibility(View.GONE);
+            }
+        });
 
         about.setOnClickListener(view -> {
+
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
         });
@@ -183,17 +196,32 @@ public class Homepage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        search.setOnClickListener(view -> {
-            ///aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            searchkey = searchbar.getText().toString().toLowerCase();
-            if (searchkey != null) {
-                searching = true;
-            }
-            else {
-                searching = false;
+
+
+        searchbar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
-            RefreshList();
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchkey = searchbar.getText().toString().toLowerCase();
+                if (searchkey != null) {
+                    searching = true;
+                } else {
+                    searching = false;
+                }
+
+                RefreshList();
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
 
         RefreshList();

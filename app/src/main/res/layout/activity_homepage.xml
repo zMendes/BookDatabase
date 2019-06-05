@@ -26,6 +26,7 @@
         />
 
         <ImageView
+            android:id="@+id/logo"
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:src="@drawable/icon"
@@ -40,12 +41,23 @@
         android:layout_marginTop="-34sp"
         />
     <ImageView
+        android:id="@+id/search_icon"
         android:layout_width="35sp"
         android:layout_height="35sp"
         android:src="@drawable/sharp_search_24"
         android:layout_marginTop="-36sp"
         android:layout_marginStart="320sp"
         />
+
+        <EditText
+            android:id="@+id/search_enter"
+            android:layout_width="310sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:textSize="20sp"
+            tools:ignore="InvalidId"
+            android:visibility="gone"/>
+
 
     <ImageView
         android:id="@+id/sortName"
@@ -64,21 +76,7 @@
         android:text="Somente possuidos:"
         android:onClick="onCheckboxClicked"/>
 
-        <EditText
-            android:id="@+id/search_enter"
-            android:layout_width="280sp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:textSize="20sp"
-            tools:ignore="InvalidId" />
-
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="100sp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-40sp"
-            android:layout_marginStart="300sp"
-            android:text="Search" />
+        
 
         <GridView
         android:id="@+id/gv"
