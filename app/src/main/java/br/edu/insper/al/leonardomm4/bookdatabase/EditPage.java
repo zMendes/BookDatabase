@@ -64,7 +64,6 @@ public class EditPage extends AppCompatActivity {
         edit = findViewById(R.id.edit);
         genre = findViewById(R.id.genre);
         author = findViewById(R.id.author);
-        has = findViewById(R.id.has);
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         confirm = findViewById(R.id.confirm);
@@ -98,13 +97,20 @@ public class EditPage extends AppCompatActivity {
             title.setText(book.getString("name"));
             genre.setText(book.getString("genre"));
             author.setText(book.getString("author"));
-            if ((book.getString("has").equals("Sim"))){
-                has.isChecked();
-            }
             rating.setText(book.getString("rating"));
             synopsis.setText(book.getString("synopsis"));
             String image = book.getString("image");
             lastPath = image;
+            has = findViewById(R.id.has);
+            if ((book.getString("has").equals("true"))){
+                has.setChecked(true);
+            }
+            else{
+                has.setChecked(false);
+            }
+
+
+
             if (image != null && image != "") {
                 // Descobre a URI do último arquivo que foi criado. Aqui não usamos
                 // a URI do provedor de arquivos porque o uso dele é apenas local.
@@ -225,9 +231,9 @@ public class EditPage extends AppCompatActivity {
                 book.put("genre", genre.getText().toString());
                 book.put("author", author.getText().toString());
                 if (has.isChecked()){
-                    book.put("has", "Sim");
+                    book.put("has", true);
                 } else {
-                    book.put("has", "Não");
+                    book.put("has", false);
                 }
 
                 book.put("rating", rating.getText().toString());
