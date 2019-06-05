@@ -45,6 +45,7 @@ public class AddPage extends AppCompatActivity {
     private EditText rating;
     private ImageView edit;
     private ImageView confirm;
+    private ImageView about;
     private String lastPath;
     private static final int CAMERA_REQUEST_CODE = 1;
     private static final int GALLERY_REQUEST_CODE = 2;
@@ -63,6 +64,7 @@ public class AddPage extends AppCompatActivity {
         author = findViewById(R.id.author);
         genre = findViewById(R.id.genre);
         has = findViewById(R.id.has);
+        about = findViewById(R.id.about);
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         confirm = findViewById(R.id.confirm);
@@ -159,7 +161,11 @@ public class AddPage extends AppCompatActivity {
             });
             builder.show();
         });
+        about.setOnClickListener(view -> {
 
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
+        });
 
         confirm.setOnClickListener(view -> {
             String json = loadData();

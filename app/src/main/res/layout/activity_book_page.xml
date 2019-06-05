@@ -35,6 +35,14 @@
             android:layout_marginTop="-42sp"
             android:layout_marginStart="88sp"/>
 
+        <ImageView
+            android:id="@+id/about"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/sharp_info_24"
+            android:layout_marginTop="-34sp"
+            />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"

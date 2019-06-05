@@ -45,6 +45,7 @@ public class EditPage extends AppCompatActivity {
     private EditText synopsis;
     private EditText rating;
     private ImageView edit;
+    private ImageView about;
     private ImageView confirm;
     private String lastPath;
 
@@ -68,6 +69,7 @@ public class EditPage extends AppCompatActivity {
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         confirm = findViewById(R.id.confirm);
+        about = findViewById(R.id.about);
         icon = findViewById(R.id.icon);
         icon.setOnClickListener(view -> {
             Intent intent = new Intent(this, Homepage.class);
@@ -136,6 +138,11 @@ public class EditPage extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        about.setOnClickListener(view -> {
+
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
+        });
         edit.setOnClickListener(view -> {
             final CharSequence[] options = { "Tirar Foto", "Escolher da Galeria","Cancelar" };
             AlertDialog.Builder builder = new AlertDialog.Builder(EditPage.this);
