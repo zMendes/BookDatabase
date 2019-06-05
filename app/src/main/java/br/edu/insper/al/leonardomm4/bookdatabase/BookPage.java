@@ -34,6 +34,7 @@ public class BookPage extends AppCompatActivity {
     private ImageView edit;
     private ImageView remove;
     private ImageView cover;
+    private ImageView about;
     private TextView icon;
 
     @Override
@@ -49,6 +50,7 @@ public class BookPage extends AppCompatActivity {
         synopsis = findViewById(R.id.synopsis);
         rating = findViewById(R.id.rating);
         cover = findViewById(R.id.cover);
+        about = findViewById(R.id.about);
         icon = findViewById(R.id.icon);
         icon.setOnClickListener(view -> {
             Intent intent = new Intent(this, Homepage.class);
@@ -128,6 +130,11 @@ public class BookPage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        about.setOnClickListener(view -> {
+
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
+        });
 
         remove.setOnClickListener(view -> {
             try {
