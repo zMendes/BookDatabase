@@ -89,8 +89,6 @@ public class EditPage extends AppCompatActivity {
 
         String json = loadData();
         try {
-            System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
-
             JSONObject root = new JSONObject(json);
             JSONObject data = root.getJSONObject("database");
             JSONArray books = data.getJSONArray("books");
@@ -106,16 +104,6 @@ public class EditPage extends AppCompatActivity {
 
             String image = book.getString("image");
             lastPath = image;
-
-            /*if ((book.getBoolean("has"))){
-                has.setChecked(true);
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            }
-            else{
-                has.setChecked(false);
-                System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-
-            }*/
 
 
             if (image != null && image != "") {
