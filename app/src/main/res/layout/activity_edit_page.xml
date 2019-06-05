@@ -80,11 +80,12 @@
             android:id="@+id/has"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160sp"
+            android:layout_marginLeft="162sp"
             android:layout_marginTop="20sp"
-            android:text="Possui:"
+            android:layoutDirection="rtl"
+            android:text="Possui: "
             android:textColor="#000000"
-            android:textSize="22sp"/>
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
