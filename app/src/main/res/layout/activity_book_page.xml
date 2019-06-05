@@ -35,6 +35,14 @@
             android:layout_marginTop="-42sp"
             android:layout_marginStart="88sp"/>
 
+        <ImageView
+            android:id="@+id/about"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/sharp_info_24"
+            android:layout_marginTop="-34sp"
+            />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -49,7 +57,7 @@
         android:layout_width="30sp"
         android:layout_height="30sp"
         android:layout_marginStart="320sp"
-        android:src="@drawable/edit"/>
+        android:src="@drawable/sharp_edit_24"/>
 
     <ImageView
         android:id="@+id/remove"
@@ -57,7 +65,7 @@
         android:layout_height="30sp"
         android:layout_marginStart="270sp"
         android:layout_marginTop="-30sp"
-        android:src="@drawable/remove"/>
+        android:src="@drawable/sharp_delete_forever_24"/>
 
     <ImageView
         android:id="@+id/cover"

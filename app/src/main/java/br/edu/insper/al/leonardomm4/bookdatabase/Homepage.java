@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -37,14 +40,20 @@ public class Homepage extends AppCompatActivity {
     private TextView icon;
     private ImageView about;
     private ImageView add;
+    private ImageView searchicon;
     private CheckBox checkBox;
 
     private TextView nautor;
     private TextView nlivros;
 
-    private int picture = R.drawable.ic_launcher_background;
+    private EditText searchbar;
+    private String searchkey;
+
+    private int picture = R.drawable.cover;
 
     private Boolean sorted;
+    private Boolean searching;
+    private Boolean searchview;
 
 
 
@@ -58,6 +67,11 @@ public class Homepage extends AppCompatActivity {
         nautor = findViewById(R.id.nautores);
         nlivros = findViewById(R.id.nlivros);
 
+        searchicon = findViewById(R.id.search_icon);
+        searchbar = findViewById(R.id.search_enter);
+
+        gridView = findViewById(R.id.gv);
+
         icon = findViewById(R.id.icon);
         icon.setOnClickListener(view -> {
             Intent intent = new Intent(this, Homepage.class);
@@ -66,6 +80,9 @@ public class Homepage extends AppCompatActivity {
 
 
         sorted = true;
+        searching = false;
+        searchkey = null;
+        searchview = false;
 
         sortName = findViewById(R.id.sortName);
         sortName.setOnClickListener(view -> {
@@ -158,9 +175,18 @@ public class Homepage extends AppCompatActivity {
             checkBox.setChecked(false);
         }
 
-
+        searchicon.setOnClickListener(view -> {
+            if (!searchview) {
+                searchview = true;
+                searchbar.setVisibility(View.VISIBLE);
+            } else {
+                searchview = false;
+                searchbar.setVisibility(View.GONE);
+            }
+        });
 
         about.setOnClickListener(view -> {
+
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
         });
@@ -168,6 +194,34 @@ public class Homepage extends AppCompatActivity {
         add.setOnClickListener(view -> {
             Intent intent = new Intent(this, AddPage.class);
             startActivity(intent);
+        });
+
+
+
+        searchbar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchkey = searchbar.getText().toString().toLowerCase();
+                if (searchkey != null) {
+                    searching = true;
+                } else {
+                    searching = false;
+                }
+
+                RefreshList();
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
         });
 
         RefreshList();
@@ -194,8 +248,8 @@ public class Homepage extends AppCompatActivity {
             json_f = loadData() ;
         }
 
-        LinkedList<StringBuilder> builders = new LinkedList<>();
-        LinkedList<StringBuilder> builders2 = new LinkedList<>();
+        //LinkedList<StringBuilder> builders = new LinkedList<>();
+        //LinkedList<StringBuilder> builders2 = new LinkedList<>();
 
         try {
 
@@ -206,26 +260,19 @@ public class Homepage extends AppCompatActivity {
 
             for(int i=0; i<books.length(); i++){
                 //int i2 = 2;
-                builders.add(new StringBuilder());
-                builders2.add(new StringBuilder());
+                //builders.add(new StringBuilder());
+                //builders2.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
-                builders.get(i).append(book.getString("name"));
-                builders2.get(i).append(book.getString("author"));
-                String imageFile = book.optString("image");
+
 
                 int picture = R.drawable.cover;
-                if (checkBox.isChecked()) {
-                    if (book.getBoolean("has")) {
-
-                        Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
-                        item.setbookImageFile(imageFile);
-                        bookList.add(item);
+                if (searching) {
+                    if ((book.getString("name").toLowerCase().contains(searchkey)) || (book.getString("author").toLowerCase().contains(searchkey))) {
+                        parseBook(book,i);
                     }
-                } else {
-                    Item item = new Item(builders.get(i).toString(),builders2.get(i).toString(), picture, i);
-                    item.setbookImageFile(imageFile);
-                    bookList.add(item);
-
+                }
+                else {
+                    parseBook(book,i);
                 }
 
             }
@@ -282,6 +329,27 @@ public class Homepage extends AppCompatActivity {
         nautor.setText("Autores: "+nauthors);
     }
 
+
+    public void parseBook(JSONObject book,int i) {
+        try {
+            String bookName = book.getString("name");
+            String bookAuthor = book.getString("author");
+            String imageFile = book.optString("image");
+            if (checkBox.isChecked()) {
+                if (book.getBoolean("has")) {
+                    Item item = new Item(bookName, bookAuthor, picture, i);
+                    item.setbookImageFile(imageFile);
+                    bookList.add(item);
+                }
+            } else {
+                Item item = new Item(bookName, bookAuthor, picture, i);
+                item.setbookImageFile(imageFile);
+                bookList.add(item);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void goToPage(int id) {
         Intent intent = new Intent(this, BookPage.class);
