@@ -220,8 +220,8 @@ public class Homepage extends AppCompatActivity {
             json_f = loadData() ;
         }
 
-        LinkedList<StringBuilder> builders = new LinkedList<>();
-        LinkedList<StringBuilder> builders2 = new LinkedList<>();
+        //LinkedList<StringBuilder> builders = new LinkedList<>();
+        //LinkedList<StringBuilder> builders2 = new LinkedList<>();
 
         try {
 
@@ -232,45 +232,19 @@ public class Homepage extends AppCompatActivity {
 
             for(int i=0; i<books.length(); i++){
                 //int i2 = 2;
-                builders.add(new StringBuilder());
-                builders2.add(new StringBuilder());
+                //builders.add(new StringBuilder());
+                //builders2.add(new StringBuilder());
                 JSONObject book = books.getJSONObject(i);
-                builders.get(i).append(book.getString("name"));
-                builders2.get(i).append(book.getString("author"));
-                String imageFile = book.optString("image");
+
 
                 int picture = R.drawable.cover;
                 if (searching) {
-                    if ((builders.get(i).toString().toLowerCase().contains(searchkey)) || (builders2.get(i).toString().toLowerCase().contains(searchkey))) {
-                        if (checkBox.isChecked()) {
-                            if (book.getBoolean("has")) {
-
-                                Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
-                                item.setbookImageFile(imageFile);
-                                bookList.add(item);
-                            }
-                        } else {
-                            Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
-                            item.setbookImageFile(imageFile);
-                            bookList.add(item);
-
-                        }
+                    if ((book.getString("name").toLowerCase().contains(searchkey)) || (book.getString("author").toLowerCase().contains(searchkey))) {
+                        parseBook(book,i);
                     }
                 }
                 else {
-                    if (checkBox.isChecked()) {
-                        if (book.getBoolean("has")) {
-
-                            Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
-                            item.setbookImageFile(imageFile);
-                            bookList.add(item);
-                        }
-                    } else {
-                        Item item = new Item(builders.get(i).toString(), builders2.get(i).toString(), picture, i);
-                        item.setbookImageFile(imageFile);
-                        bookList.add(item);
-
-                    }
+                    parseBook(book,i);
                 }
 
             }
@@ -328,7 +302,26 @@ public class Homepage extends AppCompatActivity {
     }
 
 
-
+    public void parseBook(JSONObject book,int i) {
+        try {
+            String bookName = book.getString("name");
+            String bookAuthor = book.getString("author");
+            String imageFile = book.optString("image");
+            if (checkBox.isChecked()) {
+                if (book.getBoolean("has")) {
+                    Item item = new Item(bookName, bookAuthor, picture, i);
+                    item.setbookImageFile(imageFile);
+                    bookList.add(item);
+                }
+            } else {
+                Item item = new Item(bookName, bookAuthor, picture, i);
+                item.setbookImageFile(imageFile);
+                bookList.add(item);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void goToPage(int id) {
         Intent intent = new Intent(this, BookPage.class);
