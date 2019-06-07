@@ -56,7 +56,6 @@ public class Homepage extends AppCompatActivity {
     private Boolean searchview;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,89 +78,23 @@ public class Homepage extends AppCompatActivity {
         });
 
 
-        sorted = true;
+        sorted = false;
 
         searchkey = null;
         searchview = false;
 
         sortName = findViewById(R.id.sortName);
         sortName.setOnClickListener(view -> {
-            if (sorted){
-
-            ArrayList<JSONObject> list = new ArrayList<>();
-
-            String json = loadData();
-            JSONObject root;
-            try {
-                root = new JSONObject(json);
-                JSONObject data = root.getJSONObject("database");
-                JSONArray books = data.getJSONArray("books");
-                for (int i=0;i < books.length();i++){
-                    list.add(books.getJSONObject(i));
-                }
-                Collections.sort(list, (jsonObject, t1) -> {
-                    int compare = 0;
-                    try {
-                        compare =jsonObject.getString("name").compareTo(t1.getString("name"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    return compare;
-                });
-                JSONArray Sorted = new JSONArray();
-                for (int i = 0; i < list.size(); i++) {
-                    Sorted.put(list.get(i));
-                }
-
-                data.put("books",Sorted);
-                root.put("database", data);
-                saveData(root.toString());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            RefreshList();
-            Toast toast = Toast.makeText(getApplicationContext(), "Sorting by: title", Toast.LENGTH_SHORT);
-            toast.show();
-            sorted = false;
-            }
-            else {
-                ArrayList<JSONObject> list = new ArrayList<>();
-
-                String json = loadData();
-                JSONObject root;
-                try {
-                    root = new JSONObject(json);
-                    JSONObject data = root.getJSONObject("database");
-                    JSONArray books = data.getJSONArray("books");
-                    for (int i=0;i < books.length();i++){
-                        list.add(books.getJSONObject(i));
-                    }
-                    Collections.sort(list, (jsonObject, t1) -> {
-                        int compare = 0;
-                        try {
-                            compare =jsonObject.getString("author").compareTo(t1.getString("author"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        return compare;
-                    });
-                    JSONArray Sorted = new JSONArray();
-                    for (int i = 0; i < list.size(); i++) {
-                        Sorted.put(list.get(i));
-                    }
-
-                    data.put("books",Sorted);
-                    root.put("database", data);
-                    saveData(root.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                RefreshList();
+            if (sorted) {
+                sorted = false;
+                Toast toast = Toast.makeText(getApplicationContext(), "Sorting by: title", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                sorted = true;
                 Toast toast = Toast.makeText(getApplicationContext(), "Sorting by: author", Toast.LENGTH_SHORT);
                 toast.show();
-                sorted = true;
             }
-
+            RefreshList();
 
         });
 
@@ -197,7 +130,6 @@ public class Homepage extends AppCompatActivity {
         });
 
 
-
         searchbar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -222,33 +154,36 @@ public class Homepage extends AppCompatActivity {
         countBooks();
 
 
-        gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(position));}
-  
+        gridView.setOnItemClickListener((parent, view, position, id) -> goToPage(bookList.get(position).getbookId()));
+    }
+
 
     protected void RefreshList() {
 
-        bookList =new ArrayList<>();
+        bookList = new ArrayList<>();
 
 
-        String json_f =loadData();
-        if (json_f == null){
-        String json = loadJSON();
-        saveData(json);
-        json_f = loadData();}
-
-        else {
-            json_f = loadData() ;
+        String json_f = loadData();
+        if (json_f == null) {
+            String json = loadJSON();
+            saveData(json);
+            json_f = loadData();
+        } else {
+            json_f = loadData();
         }
+        /* json_f = loadJSON();
+
+        saveData(json_f);*/
 
 
         try {
 
             JSONObject root = new JSONObject(json_f);
-            JSONObject data =  root.getJSONObject("database");
+            JSONObject data = root.getJSONObject("database");
 
             JSONArray books = data.getJSONArray("books");
 
-            for(int i=0; i<books.length(); i++){
+            for (int i = 0; i < books.length(); i++) {
                 JSONObject book = books.getJSONObject(i);
 
 
@@ -256,18 +191,19 @@ public class Homepage extends AppCompatActivity {
                 if (searchkey != null) {
 
                     if ((book.getString("name").toLowerCase().contains(searchkey)) || (book.getString("author").toLowerCase().contains(searchkey))) {
-                        parseBook(book,i);
+                        parseBook(book);
                     }
-                }
-                else {
-                    parseBook(book,i);
+                } else {
+                    parseBook(book);
                 }
 
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        MyAdapter myAdapter=new MyAdapter(this,R.layout.grid_view_items,bookList);
+        sortList(bookList);
+
+        MyAdapter myAdapter = new MyAdapter(this, R.layout.grid_view_items, bookList);
         gridView.setAdapter(myAdapter);
 
     }
@@ -276,7 +212,6 @@ public class Homepage extends AppCompatActivity {
         int nbooks = 0;
         int nauthors = 0;
 
-        bookList = new ArrayList<>();
 
         ArrayList<String> listauthors = new ArrayList<>();
 
@@ -309,28 +244,28 @@ public class Homepage extends AppCompatActivity {
                 }
 
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        catch(JSONException e){
-                e.printStackTrace();
-            }
-        nlivros.setText("Livros: "+nbooks);
-        nautor.setText("Autores: "+nauthors);
+        nlivros.setText("Livros: " + nbooks);
+        nautor.setText("Autores: " + nauthors);
     }
 
 
-    public void parseBook(JSONObject book,int i) {
+    public void parseBook(JSONObject book) {
         try {
             String bookName = book.getString("name");
             String bookAuthor = book.getString("author");
             String imageFile = book.optString("image");
+            int id = book.getInt("id");
             if (checkBox.isChecked()) {
                 if (book.getBoolean("has")) {
-                    Item item = new Item(bookName, bookAuthor, picture, i);
+                    Item item = new Item(bookName, bookAuthor, picture, id);
                     item.setbookImageFile(imageFile);
                     bookList.add(item);
                 }
             } else {
-                Item item = new Item(bookName, bookAuthor, picture, i);
+                Item item = new Item(bookName, bookAuthor, picture, id);
                 item.setbookImageFile(imageFile);
                 bookList.add(item);
             }
@@ -362,31 +297,51 @@ public class Homepage extends AppCompatActivity {
         return json;
     }
 
-    private void saveData(String s){
+    private void saveData(String s) {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("data",s);
+        editor.putString("data", s);
         editor.apply();
     }
 
-    private String loadData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences",0);
+    private String loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", 0);
         String json = sharedPreferences.getString("data", null);
         return json;
     }
+
     public void onCheckboxClicked(View view) {
         boolean checked = ((CheckBox) view).isChecked();
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.checkbox_owned:
-                if (checked){
+                if (checked) {
                     RefreshList();
                 }
                 // Do something
-            else
-                RefreshList();// Do something else
+                else
+                    RefreshList();// Do something else
                 break;
 
         }
     }
 
+    public void sortList(ArrayList<Item> list) {
+        if (sorted) {
+            Collections.sort(list, (item, item2) -> {
+
+                int compare = item.getbookName().compareTo(item2.getbookName());
+
+                return compare;
+
+            });
+        } else {
+            Collections.sort(list, (item, item2) -> {
+
+                int compare = item.getbookAuthor().compareTo(item2.getbookAuthor());
+
+                return compare;
+            });
+
+        }
     }
+}

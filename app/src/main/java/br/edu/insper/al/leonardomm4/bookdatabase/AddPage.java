@@ -182,7 +182,7 @@ public class AddPage extends AppCompatActivity {
                 JSONArray books = data.getJSONArray("books");
                 JSONObject book = new JSONObject();
 
-
+                book.put("id", books.length());
                 book.put("name", title.getText().toString());
                 book.put("author", author.getText().toString());
                 book.put("genre", genre.getText().toString());

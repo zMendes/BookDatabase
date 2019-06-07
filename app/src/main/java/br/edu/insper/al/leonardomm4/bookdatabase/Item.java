@@ -2,17 +2,18 @@ package br.edu.insper.al.leonardomm4.bookdatabase;
 
 public class Item {
 
-        String bookListName;
-        String bookListAuthor;
-        int bookListImage;
-        String bookListImageFile;
-        int bookListId;
+        private String bookListName;
+        private String bookListAuthor;
+        private int bookListImage;
+        private String bookListImageFile;
+        private int bookListId;
 
         public Item(String bookName,String bookAuthor,int bookImage,int id)
         {
             this.bookListImage=bookImage;
             this.bookListAuthor=bookAuthor;
             this.bookListName=bookName;
+            this.bookListId=id;
         }
         public String getbookName()
         {

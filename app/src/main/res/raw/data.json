@@ -2,6 +2,7 @@
 	"database": {
 		"books": [
 			{
+				"id": 0,
 				"name": "Harry Potter e a Pedra Filosofal",
 				"author": "J.K. Rowling",
 				"genre": "Fantasia",
@@ -12,6 +13,7 @@
 				"image": null
 			},
 			{
+				"id": 1,
 				"name": "Uncharted - o Quarto labirinto",
 				"author": "Cristopher Golden",
 				"genre": "Aventura",
@@ -22,6 +24,7 @@
 				"image": null
 			},
 			{
+				"id": 2,
 				"name": "O Príncipe",
 				"author": "Nicolau Machiavel",
 				"genre": "Cultura",
@@ -32,6 +35,7 @@
 				"image": null
 			},
 			{
+				"id": 3,
 				"name": "Zac Power 1 - Ilha do Veneno",
 				"author": "H.I. Larry",
 				"genre": "Aventura",
@@ -41,7 +45,8 @@
 				"where": "Escola.",
 				"image": null
 			},
-			{				
+			{
+				"id": 4,
 				"name": "O livro do chá",
 				"author": "Kazuko Okakura",
 				"genre": "Cultura",
@@ -51,7 +56,8 @@
 				"where": "Café.",
 				"image": null
 			},
-			{				
+			{
+				"id": 5,
 				"name": "A Game of Thrones",
 				"author": "George R.R. Martin",
 				"genre": "Fantasia",
@@ -61,7 +67,8 @@
 				"where": "Casa.",
 				"image": null
 			},
-			{				
+			{
+				"id": 6,
 				"name": "Harry Potter e a Câmara Secreta",
 				"author": "J.K. Rowling",
 				"genre": "Fantasia",
@@ -71,7 +78,8 @@
 				"where": "Escola, quando criança.",
 				"image": null
 			},
-			{				
+			{
+				"id": 7,
 				"name": "Harry Potter e o Prisioneiro de Askaban",
 				"author": "J.K. Rowling",
 				"genre": "Fantasia",
@@ -81,7 +89,8 @@
 				"where": "Casa, quando criança.",
 				"image": null
 			},
-			{				
+			{
+				"id": 8,
 				"name": "Harry Potter e o Cálice de Fogo",
 				"author": "J.K. Rowling",
 				"genre": "Fantasia",
@@ -91,7 +100,8 @@
 				"where": "Casa da minha vó no RJ.",
 				"image": null
 			},
-			{				
+			{
+				"id": 9,
 				"name": "Harry Potter e a Ordem da Fênix",
 				"author": "J.K. Rowling",
 				"genre": "Fantasia",
@@ -101,7 +111,8 @@
 				"where": "Minha casa quando era adolescente.",
 				"image": null
 			},
-			{				
+			{
+				"id": 10,
 				"name": "Harry Potter e a Enigma do Príncipe",
 				"author": "J.K. Rowling",
 				"genre": "Fantasia",
@@ -111,7 +122,8 @@
 				"where": "Minha casa.",
 				"image": null
 			},
-						{				
+			{
+				"id": 11,
 				"name": "Harry Potter e as Relíqueas da Morte",
 				"author": "J.K. Rowling",
 				"genre": "Fantasia",

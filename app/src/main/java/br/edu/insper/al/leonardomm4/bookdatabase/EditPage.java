@@ -94,7 +94,9 @@ public class EditPage extends AppCompatActivity {
             JSONObject root = new JSONObject(json);
             JSONObject data = root.getJSONObject("database");
             JSONArray books = data.getJSONArray("books");
-            JSONObject book = books.getJSONObject(id);
+            int i = 0;
+            while (books.getJSONObject(i).getInt("id") != id) { i++;}
+            JSONObject book = books.getJSONObject(i);
 
             title.setText(book.getString("name"));
             genre.setText(book.getString("genre"));
