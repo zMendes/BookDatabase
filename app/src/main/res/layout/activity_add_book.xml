@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     android:layout_height="match_parent"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         tools:context=".BookPage"
         android:orientation="vertical">
 
@@ -127,6 +126,6 @@
             android:layout_width="60sp"
             android:layout_height="60sp"
             android:src="@drawable/sharp_check_circle_24"
-            android:layout_marginStart="145sp"/>
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </ScrollView>

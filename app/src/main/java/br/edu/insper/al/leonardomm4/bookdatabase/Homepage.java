@@ -254,7 +254,7 @@ public class Homepage extends AppCompatActivity {
 
                 int picture = R.drawable.cover;
                 if (searchkey != null) {
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
                     if ((book.getString("name").toLowerCase().contains(searchkey)) || (book.getString("author").toLowerCase().contains(searchkey))) {
                         parseBook(book,i);
                     }
