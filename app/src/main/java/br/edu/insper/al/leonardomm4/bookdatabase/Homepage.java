@@ -238,7 +238,6 @@ public class Homepage extends AppCompatActivity {
                 String aut = book.getString("author");
 
                 if (!(listauthors.contains(aut))) {
-                    System.out.println(aut);
                     nauthors++;
                     listauthors.add(aut);
                 }
