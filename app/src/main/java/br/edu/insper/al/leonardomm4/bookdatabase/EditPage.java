@@ -266,6 +266,8 @@ public class EditPage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        Rotator rotator = new Rotator();
+
         // Confirma que de fato é o resultado da Intent de "tirar foto"
         // e que de fato a Activity que recebeu a Intent teve resultado.
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -277,8 +279,10 @@ public class EditPage extends AppCompatActivity {
             // Carrega uma imagem a partir da URI, se possível.
             Bitmap bitmap;
             try {
-
+                ExifInterface exif = new ExifInterface(uri.getPath());
+                int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                bitmap= rotator.rotateBitmap(bitmap, orientation);
             } catch (IOException exception) {
                 bitmap = null;
             }
